@@ -7,7 +7,7 @@ namespace DBWatcher.Core.Services
 {
     public interface IScriptService
     {
-        IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties, string databaseName);
-        Task<IScriptExecutor> GetScriptExecutor(Guid connectionPropertiesId, string databaseName);
+        IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties, string databaseName = null);
+        Task<IScriptExecutor> GetScriptExecutor(Guid connectionPropertiesId, string databaseName = null);
     }
 }

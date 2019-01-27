@@ -6,7 +6,7 @@ namespace DBWatcher.Core.Services
 {
     public class ConnectionBuilder : IConnectionBuilder
     {
-        public SqlConnection BuildConnection(ConnectionProperties connectionProperties, string databaseName)
+        public SqlConnection BuildConnection(ConnectionProperties connectionProperties, string databaseName = null)
         {
             return new SqlConnection(CreateConnectionString(connectionProperties.Server, databaseName,
                 connectionProperties.Login, connectionProperties.Password));

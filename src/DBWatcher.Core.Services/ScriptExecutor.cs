@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dapper;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.Repositories;
+using DBWatcher.Core.ScriptResult;
 
 namespace DBWatcher.Core.Services
 {
@@ -33,9 +34,9 @@ namespace DBWatcher.Core.Services
             return _connectionBuilder.BuildConnection(ConnectionProperties, DatabaseName);
         }
 
-        public async Task<ScriptResult> ExecuteScript(Script script)
+        public async Task<ScriptMultipleResult> ExecuteScript(Script script)
         {
-            var result = new ScriptResult();
+            var result = new ScriptMultipleResult();
             var data = new List<IEnumerable<dynamic>>();
             try {
                 using (var connection = BuildConnection()) {
@@ -54,9 +55,9 @@ namespace DBWatcher.Core.Services
             return result;
         }
 
-        public async Task<ScriptResult> InstallScriptToDb(string text)
+        public async Task<ScriptResult.ScriptResult> InstallScriptToDb(string text)
         {
-            var result = new ScriptResult();
+            var result = new ScriptResult.ScriptResult();
             try {
                 using (var connection = BuildConnection()) {
                     await connection.QueryAsync(text);

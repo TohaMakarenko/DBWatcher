@@ -12,12 +12,12 @@ namespace DBWatcher.Core.Services
             _connectionPropertiesService = connectionPropertiesService;
         }
 
-        public IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties, string databaseName)
+        public IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties, string databaseName = null)
         {
             return new ScriptExecutor(connectionProperties, databaseName);
         }
 
-        public async Task<IScriptExecutor> GetScriptExecutor(Guid connectionPropertiesId, string databaseName)
+        public async Task<IScriptExecutor> GetScriptExecutor(Guid connectionPropertiesId, string databaseName = null)
         {
             return GetScriptExecutor(await _connectionPropertiesService.GetByIdDecrypted(connectionPropertiesId), databaseName);
         }

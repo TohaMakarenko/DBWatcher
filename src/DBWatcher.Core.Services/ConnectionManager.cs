@@ -12,7 +12,7 @@ namespace DBWatcher.Core.Services
             set => _connectionBuilder = value;
         }
 
-        public static SqlConnection BuildConnection(ConnectionProperties connectionProperties, string databaseName)
+        public static SqlConnection GetConnection(ConnectionProperties connectionProperties, string databaseName = null)
         {
             return ConnectionBuilder.BuildConnection(connectionProperties, databaseName);
         }

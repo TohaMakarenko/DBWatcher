@@ -5,6 +5,6 @@ namespace DBWatcher.Core.Services
 {
     public interface IConnectionBuilder
     {
-        SqlConnection BuildConnection(ConnectionProperties connectionProperties, string databaseName);
+        SqlConnection BuildConnection(ConnectionProperties connectionProperties, string databaseName = null);
     }
 }
