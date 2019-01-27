@@ -11,7 +11,7 @@ namespace DBWatcher.Core.Repositories
         Task<List<Script>> GetShortInfoPage(int offset, int count);
         Task<List<Script>> FindByName(string name);
         Task<List<Script>> FindByNameOrDescription(string name, string description);
-        Task CreateScript(Script script);
+        Task InsertScript(Script script);
         Task UpdateScript(Script script);
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace DBWatcher.Core.Entities
 {
-    public class ConnectionProperty
+    public class ConnectionProperties
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

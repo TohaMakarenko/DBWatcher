@@ -4,6 +4,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2207A848-C96
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core", "src\DBWatcher.Core\DBWatcher.Core.csproj", "{814EE155-2009-4C4C-AA3C-B0C325CB13C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core.Services", "src\DBWatcher.Core.Services\DBWatcher.Core.Services.csproj", "{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A4636442-A285-4EF0-AEDC-65B194269598}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualConsoleTest", "test\ManualConsoleTest\ManualConsoleTest.csproj", "{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,8 +20,18 @@ Global
 		{814EE155-2009-4C4C-AA3C-B0C325CB13C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{814EE155-2009-4C4C-AA3C-B0C325CB13C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{814EE155-2009-4C4C-AA3C-B0C325CB13C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{814EE155-2009-4C4C-AA3C-B0C325CB13C1} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
+		{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
+		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55} = {A4636442-A285-4EF0-AEDC-65B194269598}
 	EndGlobalSection
 EndGlobal

@@ -5,6 +5,7 @@ namespace DBWatcher.Core.Services
 {
     public interface IDatabaseService
     {
-        Task<string> GetDatabases(ConnectionProperty connectionProperty);
+        Task<string> GetDatabases(ConnectionProperties connectionProperties);
+        Task<bool> IsObjectExists(string name);
     }
 }
