@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net.Http.Headers;
 using DBWatcher.Core.Entities;
-using DBWatcher.Core.Repositories;
 using DBWatcher.Core.ScriptResult;
 using DBWatcher.Core.Services;
 
@@ -28,7 +26,7 @@ namespace ManualConsoleTest
             var scriptService = new ScriptService(conPropsService);
             var executor = scriptService.GetScriptExecutor(props);
             var script = new Script() {
-                Body = "select * from sys.databasqes"
+                Body = "select * from sys.databases"
             };
             var result = await executor.ExecuteScript(script);
             PrintScriptMultipleResult(result);

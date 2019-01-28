@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A4636442-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualConsoleTest", "test\ManualConsoleTest\ManualConsoleTest.csproj", "{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Infrastructure.Data", "src\DBWatcher.Infrastructure.Data\DBWatcher.Infrastructure.Data.csproj", "{D99A6153-9F57-41A1-8F37-8F39B706BF95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +30,15 @@ Global
 		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D99A6153-9F57-41A1-8F37-8F39B706BF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99A6153-9F57-41A1-8F37-8F39B706BF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D99A6153-9F57-41A1-8F37-8F39B706BF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D99A6153-9F57-41A1-8F37-8F39B706BF95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{814EE155-2009-4C4C-AA3C-B0C325CB13C1} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
 		{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
 		{02736DBA-70E0-4818-BCAB-6AA3A22DAD55} = {A4636442-A285-4EF0-AEDC-65B194269598}
+		{D99A6153-9F57-41A1-8F37-8F39B706BF95} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
 	EndGlobalSection
 EndGlobal
