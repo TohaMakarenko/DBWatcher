@@ -13,7 +13,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
 
         private IMongoCollection<Script> GetCollection()
         {
-            return MongoConnectionManager.GetDatabase().GetCollection<Script>("CollectionName");
+            return MongoConnectionManager.GetDatabase().GetCollection<Script>(CollectionName);
         }
 
         public Task<Script> GetById(Guid id)

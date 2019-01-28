@@ -8,6 +8,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\DBWatcher.Core.Services\DBWatcher.Core.Services.csproj" />
       <ProjectReference Include="..\..\src\DBWatcher.Core\DBWatcher.Core.csproj" />
+      <ProjectReference Include="..\..\src\DBWatcher.Infrastructure.Data\DBWatcher.Infrastructure.Data.csproj" />
     </ItemGroup>
 
 </Project>
