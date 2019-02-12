@@ -7,14 +7,10 @@ using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
-    public class ScriptRepository : IScriptRepository
+    public class ScriptRepository : BaseRepository<Script>, IScriptRepository
     {
-        private const string CollectionName = "Scripts";
-
-        private IMongoCollection<Script> GetCollection()
-        {
-            return MongoConnectionManager.GetDatabase().GetCollection<Script>(CollectionName);
-        }
+        public ScriptRepository(IMongoDatabase database, string collectionName) : base(database, collectionName) { }
+        public ScriptRepository(IMongoDatabase database) : base(database, "Scripts") { }
 
         public Task<Script> GetById(Guid id)
         {

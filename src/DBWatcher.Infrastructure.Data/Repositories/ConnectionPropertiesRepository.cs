@@ -7,14 +7,13 @@ using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
-    public class ConnectionPropertiesRepository : IConnectionPropertiesRepository
+    public class ConnectionPropertiesRepository : BaseRepository<ConnectionProperties>, IConnectionPropertiesRepository
     {
-        private const string CollectionName = "ConnectionProperties";
+        public ConnectionPropertiesRepository(IMongoDatabase database, string collectionName)
+            : base(database, collectionName) { }
 
-        private IMongoCollection<ConnectionProperties> GetCollection()
-        {
-            return MongoConnectionManager.GetDatabase().GetCollection<ConnectionProperties>(CollectionName);
-        }
+        public ConnectionPropertiesRepository(IMongoDatabase database) : base(database, "ConnectionProperties") { }
+
 
         public Task<ConnectionProperties> GetById(Guid id)
         {

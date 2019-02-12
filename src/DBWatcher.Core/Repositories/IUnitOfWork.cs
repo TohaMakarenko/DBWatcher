@@ -1,6 +1,6 @@
 namespace DBWatcher.Core.Repositories
 {
-    public interface IStorage
+    public interface IUnitOfWork
     {
         IScriptRepository ScriptRepository { get; }
         IConnectionPropertiesRepository ConnectionPropertiesRepository { get; }

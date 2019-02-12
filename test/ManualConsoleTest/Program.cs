@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.Repositories;
 using DBWatcher.Core.ScriptResult;
@@ -20,26 +21,10 @@ namespace ManualConsoleTest
 
         static async void TestRepos()
         {
-            MongoConnectionManager.ConnectionString = ConnectionString;
-            IConnectionPropertiesRepository cpRepo = new ConnectionPropertiesRepository();
-            IScriptRepository scRepo = new ScriptRepository();
-            var conProps = new ConnectionProperties() {
-                Name = "TestConnectionProps1",
-                Login = "sa",
-                Password = "sa",
-                Server = @"localhost\SQLEXPRESS"
-            };
-            await cpRepo.InsertConnection(conProps);
-            var script = new Script() {
-                Name = "ScriptTest1",
-                Author = "Author1",
-                Body = "select * from ErrorLog",
-                Description = "Script description"
-            };
-            await scRepo.InsertScript(script);
+            await TestServices();
         }
 
-        static async void TestServices()
+        static async Task TestServices()
         {
             var props = new ConnectionProperties() {
                 Server = @"localhost\SQLEXPRESS",
