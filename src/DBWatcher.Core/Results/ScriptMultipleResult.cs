@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DBWatcher.Core.ScriptResult
+namespace DBWatcher.Core.Results
 {
     public class ScriptMultipleResult : ScriptResult<IEnumerable<dynamic>>
 

@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Dapper;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.Repositories;
-using DBWatcher.Core.ScriptResult;
+using DBWatcher.Core.Results;
 using DBWatcher.Core.Services;
 using DBWatcher.Infrastructure.Data;
 using DBWatcher.Infrastructure.Data.Repositories;
 
 namespace ManualConsoleTest
 {
+    
     class Program
     {
         const string ConnectionString = "mongodb://localhost:27017/DbWatcherTest";
@@ -21,7 +25,8 @@ namespace ManualConsoleTest
 
         static async void TestRepos()
         {
-            await TestServices();
+            var sqlConn = new SqlConnection();
+            var trans = sqlConn.BeginTransaction(IsolationLevel.Chaos);
         }
 
         static async Task TestServices()
@@ -39,7 +44,7 @@ namespace ManualConsoleTest
             var script = new Script() {
                 Body = "select * from sys.databases"
             };
-            var result = await executor.ExecuteScript(script);
+            var result = await executor.ExecuteScriptMultiple(script.Body);
             PrintScriptMultipleResult(result);
         }
 

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
-namespace DBWatcher.Core.Entities
+namespace DBWatcher.API.DTO.Scripts
 {
-    public class Script
+    public class ScriptDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
+using DBWatcher.Core.ScriptExecutor;
 
 namespace DBWatcher.Core.Services
 {

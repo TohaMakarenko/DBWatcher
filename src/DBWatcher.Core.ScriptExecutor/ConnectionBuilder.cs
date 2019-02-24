@@ -1,8 +1,7 @@
 using System.Data.SqlClient;
-using System.Linq.Expressions;
 using DBWatcher.Core.Entities;
 
-namespace DBWatcher.Core.Services
+namespace DBWatcher.Core.ScriptExecutor
 {
     public class ConnectionBuilder : IConnectionBuilder
     {

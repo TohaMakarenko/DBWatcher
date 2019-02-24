@@ -1,7 +1,7 @@
 using System.Data.SqlClient;
 using DBWatcher.Core.Entities;
 
-namespace DBWatcher.Core.Services
+namespace DBWatcher.Core.ScriptExecutor
 {
     public static class ConnectionManager
     {

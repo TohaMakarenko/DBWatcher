@@ -1,25 +1,26 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using DBWatcher.Core.Entities;
+using DBWatcher.Core.ScriptExecutor;
 
 namespace DBWatcher.Core.Services
 {
     public class DatabaseService : IDatabaseService
     {
-        public Task<IEnumerable<string>> GetDatabases(ConnectionProperties connectionProperties)
-        {
-            using (var connection = ConnectionManager.GetConnection(connectionProperties)) {
-                return connection.QueryAsync<string>("select name from sys.databases");
-            }
-        }
+        private readonly IScriptService _scriptService;
 
-        public async Task<bool> IsObjectExists(ConnectionProperties connectionProperties, string name)
+        public DatabaseService(IScriptService scriptService)
         {
-            using (var connection = ConnectionManager.GetConnection(connectionProperties)) {
-                return await connection.QueryFirstOrDefaultAsync<int?>("select OBJECT_ID(@objectName)",
-                           new {objectName = name}) == null;
-            }
+            _scriptService = scriptService;
+        }
+        
+        public async Task<IEnumerable<string>> GetDatabases(ConnectionProperties connectionProperties)
+        {
+            var result = await _scriptService.GetScriptExecutor(connectionProperties)
+                .ExecuteScript<string>("select name from sys.databases");
+            return result.GetResult();
         }
     }
 }
