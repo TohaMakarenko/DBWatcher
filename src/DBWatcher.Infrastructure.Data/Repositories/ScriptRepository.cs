@@ -7,15 +7,10 @@ using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
-    public class ScriptRepository : BaseRepository<Script>, IScriptRepository
+    public class ScriptRepository : BaseEventRepository<Script, Guid>, IScriptRepository
     {
         public ScriptRepository(IMongoDatabase database, string collectionName) : base(database, collectionName) { }
         public ScriptRepository(IMongoDatabase database) : base(database, "Scripts") { }
-
-        public Task<Script> GetById(Guid id)
-        {
-            return GetCollection().Find(i => i.Id == id).FirstOrDefaultAsync();
-        }
 
         public Task<List<Script>> GetShortInfoPage(int offset, int count)
         {
@@ -36,17 +31,6 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         {
             return GetCollection().Find(i => i.Name.Contains(name) || i.Description.Contains(description))
                 .ToListAsync();
-        }
-
-        public Task InsertScript(Script script)
-        {
-            return GetCollection().InsertOneAsync(script);
-        }
-
-        public Task UpdateScript(Script script)
-        {
-            return GetCollection().ReplaceOneAsync(i => i.Id == script.Id, script,
-                new UpdateOptions() {IsUpsert = true});
         }
     }
 }

@@ -27,17 +27,17 @@ namespace DBWatcher.Core.Services
                 connectionProperties.Password = _cryptoManager.Encrypt(connectionProperties.Password);
             }
 
-            return _connectionPropertiesRepository.InsertConnection(connectionProperties);
+            return _connectionPropertiesRepository.Insert(connectionProperties);
         }
 
         public Task<ConnectionProperties> GetById(Guid id)
         {
-            return _connectionPropertiesRepository.GetById(id);
+            return _connectionPropertiesRepository.Get(id);
         }
 
         public async Task<ConnectionProperties> GetByIdDecrypted(Guid id)
         {
-            var props = await _connectionPropertiesRepository.GetById(id);
+            var props = await _connectionPropertiesRepository.Get(id);
             if (props.IsPasswordEncrypted) {
                 props.Password = _cryptoManager.Decrypt(props.Password);
             }

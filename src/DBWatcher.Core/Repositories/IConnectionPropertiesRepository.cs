@@ -5,11 +5,8 @@ using DBWatcher.Core.Entities;
 
 namespace DBWatcher.Core.Repositories
 {
-    public interface IConnectionPropertiesRepository
+    public interface IConnectionPropertiesRepository : IEventRepository<ConnectionProperties, Guid>
     {
-        Task<ConnectionProperties> GetById(Guid id);
         Task<List<ConnectionProperties>> GetShortInfoList();
-        Task InsertConnection(ConnectionProperties connectionProperties);
-        Task UpdateConnection(ConnectionProperties connectionProperties);
     }
 }
