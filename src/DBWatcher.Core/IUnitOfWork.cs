@@ -1,4 +1,7 @@
-namespace DBWatcher.Core.Repositories
+using DBWatcher.Core.Queue;
+using DBWatcher.Core.Repositories;
+
+namespace DBWatcher.Core
 {
     public interface IUnitOfWork
     {

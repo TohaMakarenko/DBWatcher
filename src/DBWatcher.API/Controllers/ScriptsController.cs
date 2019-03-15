@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.API.DTO.Scripts;
+using DBWatcher.Core;
 using DBWatcher.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 

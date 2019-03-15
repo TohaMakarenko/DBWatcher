@@ -1,3 +1,4 @@
+using DBWatcher.Core;
 using DBWatcher.Core.Repositories;
 using DBWatcher.Infrastructure.Data.Repositories;
 using MongoDB.Driver;
