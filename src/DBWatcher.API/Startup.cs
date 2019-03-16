@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.Core;
 using DBWatcher.Core.Queue;
+using DBWatcher.Core.ScriptExecutor;
 using DBWatcher.Infrastructure.Data;
 using DBWatcher.Infrastructure.Events;
 using DBWatcher.Infrastructure.Rabbit;
@@ -36,6 +37,7 @@ namespace DBWatcher.API
             services.AddRabbitMessageBus(Configuration["ConnectionStrings.Rabbit"]);
             services.AddUnitOfWork(Configuration["ConnectionStrings.Mongo"]);
             services.AddEventHandlers();
+            IScriptExecutor se;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

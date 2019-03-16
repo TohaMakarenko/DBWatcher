@@ -17,13 +17,9 @@ namespace DBWatcher.Core.Services
             _cryptoManager = cryptoManager;
         }
 
-        public Task SaveConnectionProperty(ConnectionProperties connectionProperties, bool needSavePassword,
-            bool needEncryptPassword)
+        public Task SaveConnectionProperty(ConnectionProperties connectionProperties)
         {
-            if (!needSavePassword) {
-                connectionProperties.Password = null;
-            }
-            else if (needEncryptPassword) {
+            if (connectionProperties.IsPasswordEncrypted) {
                 connectionProperties.Password = _cryptoManager.Encrypt(connectionProperties.Password);
             }
 

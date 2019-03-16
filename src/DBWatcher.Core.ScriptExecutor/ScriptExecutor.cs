@@ -32,7 +32,7 @@ namespace DBWatcher.Core.Services
                 }
             }
             catch (SqlException e) {
-                result.SetErrors(e);
+                result.SetException(e);
             }
 
             return result;
@@ -53,7 +53,7 @@ namespace DBWatcher.Core.Services
                 }
             }
             catch (SqlException e) {
-                result.SetErrors(e);
+                result.SetException(e);
             }
 
             return result;
