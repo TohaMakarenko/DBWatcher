@@ -20,7 +20,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DBWatcher.API.DTO\DBWatcher.API.DTO.csproj" />
+      <ProjectReference Include="..\DBWatcher.Core.ScriptExecutor\DBWatcher.Core.ScriptExecutor.csproj" />
+      <ProjectReference Include="..\DBWatcher.Core.Services\DBWatcher.Core.Services.csproj" />
       <ProjectReference Include="..\DBWatcher.Core\DBWatcher.Core.csproj" />
+      <ProjectReference Include="..\DBWatcher.Infrastructure.Data\DBWatcher.Infrastructure.Data.csproj" />
+      <ProjectReference Include="..\DBWatcher.Infrastructure.Events\DBWatcher.Infrastructure.Events.csproj" />
+      <ProjectReference Include="..\DBWatcher.Infrastructure.Rabbit\DBWatcher.Infrastructure.Rabbit.csproj" />
     </ItemGroup>
 
 </Project>
