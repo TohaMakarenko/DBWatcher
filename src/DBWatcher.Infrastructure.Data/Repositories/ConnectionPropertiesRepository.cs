@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.Repositories;
@@ -7,7 +6,8 @@ using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
-    public class ConnectionPropertiesRepository : BaseEventRepository<ConnectionProperties, Guid>, IConnectionPropertiesRepository
+    public class ConnectionPropertiesRepository : BaseEventRepository<ConnectionProperties, int>,
+        IConnectionPropertiesRepository
     {
         public ConnectionPropertiesRepository(IMongoDatabase database, string collectionName)
             : base(database, collectionName) { }
@@ -19,8 +19,14 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         {
             return GetCollection().Find(FilterDefinition<ConnectionProperties>.Empty)
                 .Project(Builders<ConnectionProperties>.Projection
-                    .Expression(i => new ConnectionProperties() {Id = i.Id, Name = i.Name, Server = i.Server}))
+                    .Expression(i => new ConnectionProperties {Id = i.Id, Name = i.Name, Server = i.Server}))
                 .ToListAsync();
+        }
+
+        public override async Task<ConnectionProperties> Insert(ConnectionProperties entity)
+        {
+            entity.Id = await GetNextId<Script>();
+            return await base.Insert(entity);
         }
     }
 }

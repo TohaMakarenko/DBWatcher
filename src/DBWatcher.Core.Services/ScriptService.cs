@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.ScriptExecutor;
 
 namespace DBWatcher.Core.Services
 {
-    public class ScriptService: IScriptService {
+    public class ScriptService : IScriptService
+    {
         private readonly IConnectionPropertiesService _connectionPropertiesService;
 
         public ScriptService(IConnectionPropertiesService connectionPropertiesService)
@@ -18,9 +18,10 @@ namespace DBWatcher.Core.Services
             return new ScriptExecutor(connectionProperties, databaseName);
         }
 
-        public async Task<IScriptExecutor> GetScriptExecutor(Guid connectionPropertiesId, string databaseName = null)
+        public async Task<IScriptExecutor> GetScriptExecutor(int connectionPropertiesId, string databaseName = null)
         {
-            return GetScriptExecutor(await _connectionPropertiesService.GetByIdDecrypted(connectionPropertiesId), databaseName);
+            return GetScriptExecutor(await _connectionPropertiesService.GetByIdDecrypted(connectionPropertiesId),
+                databaseName);
         }
     }
 }

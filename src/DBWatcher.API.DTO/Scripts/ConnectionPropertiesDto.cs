@@ -1,10 +1,8 @@
-using System;
-
 namespace DBWatcher.API.DTO.Scripts
 {
     public class ConnectionPropertiesDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Server { get; set; }
         public string Login { get; set; }

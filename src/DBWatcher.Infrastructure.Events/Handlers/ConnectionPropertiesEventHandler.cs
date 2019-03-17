@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.Core.Entities;
@@ -8,10 +7,10 @@ using DBWatcher.Core.Queue;
 
 namespace DBWatcher.Infrastructure.Events.Handlers
 {
-    public class ConnectionPropertiesEventHandler : IEventHandler<ConnectionProperties, Guid>
+    public class ConnectionPropertiesEventHandler : IEventHandler<ConnectionProperties, int>
     {
-        private readonly IMessageBus _messageBus;
         private readonly IMapper _mapper;
+        private readonly IMessageBus _messageBus;
 
         public ConnectionPropertiesEventHandler(IMessageBus messageBus, IMapper mapper)
         {
@@ -29,9 +28,9 @@ namespace DBWatcher.Infrastructure.Events.Handlers
             PublishChangeAsync(entity);
         }
 
-        public void HandleDelete(Guid id)
+        public void HandleDelete(int id)
         {
-            _messageBus.PublishAsync(new ConnectionPropertiesDeleted() {
+            _messageBus.PublishAsync(new ConnectionPropertiesDeleted {
                 Id = id
             });
         }

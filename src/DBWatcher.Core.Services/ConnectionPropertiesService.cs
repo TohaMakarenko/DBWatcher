@@ -1,42 +1,37 @@
-using System;
 using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
-using DBWatcher.Core.Repositories;
 
 namespace DBWatcher.Core.Services
 {
     public class ConnectionPropertiesService : IConnectionPropertiesService
     {
-        private readonly IConnectionPropertiesRepository _connectionPropertiesRepository;
         private readonly ICryptoManager _cryptoManager;
+        private readonly IUnitOfWork _work;
 
-        public ConnectionPropertiesService(IConnectionPropertiesRepository connectionPropertiesRepository,
+        public ConnectionPropertiesService(IUnitOfWork work,
             ICryptoManager cryptoManager)
         {
-            _connectionPropertiesRepository = connectionPropertiesRepository;
+            _work = work;
             _cryptoManager = cryptoManager;
         }
 
         public Task SaveConnectionProperty(ConnectionProperties connectionProperties)
         {
-            if (connectionProperties.IsPasswordEncrypted) {
+            if (connectionProperties.IsPasswordEncrypted)
                 connectionProperties.Password = _cryptoManager.Encrypt(connectionProperties.Password);
-            }
 
-            return _connectionPropertiesRepository.Insert(connectionProperties);
+            return _work.ConnectionPropertiesRepository.Insert(connectionProperties);
         }
 
-        public Task<ConnectionProperties> GetById(Guid id)
+        public Task<ConnectionProperties> GetById(int id)
         {
-            return _connectionPropertiesRepository.Get(id);
+            return _work.ConnectionPropertiesRepository.Get(id);
         }
 
-        public async Task<ConnectionProperties> GetByIdDecrypted(Guid id)
+        public async Task<ConnectionProperties> GetByIdDecrypted(int id)
         {
-            var props = await _connectionPropertiesRepository.Get(id);
-            if (props.IsPasswordEncrypted) {
-                props.Password = _cryptoManager.Decrypt(props.Password);
-            }
+            var props = await _work.ConnectionPropertiesRepository.Get(id);
+            if (props.IsPasswordEncrypted) props.Password = _cryptoManager.Decrypt(props.Password);
 
             return props;
         }

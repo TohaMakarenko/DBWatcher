@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
@@ -7,7 +6,7 @@ using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
-    public class ScriptRepository : BaseEventRepository<Script, Guid>, IScriptRepository
+    public class ScriptRepository : BaseEventRepository<Script, int>, IScriptRepository
     {
         public ScriptRepository(IMongoDatabase database, string collectionName) : base(database, collectionName) { }
         public ScriptRepository(IMongoDatabase database) : base(database, "Scripts") { }
@@ -17,7 +16,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
             return GetCollection().Find(FilterDefinition<Script>.Empty)
                 .Skip(offset)
                 .Limit(count)
-                .Project(Builders<Script>.Projection.Expression(i => new Script()
+                .Project(Builders<Script>.Projection.Expression(i => new Script
                     {Id = i.Id, Name = i.Name, Description = i.Description, Author = i.Author}))
                 .ToListAsync();
         }
@@ -31,6 +30,12 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         {
             return GetCollection().Find(i => i.Name.Contains(name) || i.Description.Contains(description))
                 .ToListAsync();
+        }
+
+        public override async Task<Script> Insert(Script entity)
+        {
+            entity.Id = await GetNextId<Script>();
+            return await base.Insert(entity);
         }
     }
 }

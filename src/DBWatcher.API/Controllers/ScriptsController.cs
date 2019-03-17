@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.API.DTO.Scripts;
 using DBWatcher.Core;
-using DBWatcher.Core.Repositories;
+using DBWatcher.Core.Results;
+using DBWatcher.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DBWatcher.API.Controllers
@@ -14,19 +12,32 @@ namespace DBWatcher.API.Controllers
     [ApiController]
     public class ScriptsController : ControllerBase
     {
-        private readonly IUnitOfWork _work;
         private readonly IMapper _mapper;
+        private readonly IScriptService _scriptService;
+        private readonly IUnitOfWork _work;
 
-        public ScriptsController(IUnitOfWork work, IMapper mapper)
+        public ScriptsController(IUnitOfWork work, IMapper mapper, IScriptService scriptService)
         {
             _work = work;
             _mapper = mapper;
+            _scriptService = scriptService;
         }
 
-        [HttpGet]
-        public async Task<ScriptDto> GetScript(Guid id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ScriptDto>> GetScript(int id)
         {
-            return _mapper.Map<ScriptDto>(await _work.ScriptRepository.Get(id));
+            var script = await _work.ScriptRepository.Get(id);
+            if (script == null)
+                return NotFound();
+            return _mapper.Map<ScriptDto>(script);
+        }
+
+        [HttpPost("Execute")]
+        public async Task<ActionResult<ScriptMultipleResult>> ExecuteScript([FromBody] ExecuteScriptDto executeScript)
+        {
+            var connection = await _work.ConnectionPropertiesRepository.Get(executeScript.ConnectionPropsId);
+            var executor = _scriptService.GetScriptExecutor(connection, executeScript.Database);
+            return await executor.ExecuteScriptMultiple(executeScript.Body, executeScript.Params);
         }
     }
 }

@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using DBWatcher.Core;
-using DBWatcher.Core.Queue;
-using DBWatcher.Core.ScriptExecutor;
+﻿using AutoMapper;
+using DBWatcher.Core.Services;
 using DBWatcher.Infrastructure.Data;
 using DBWatcher.Infrastructure.Events;
 using DBWatcher.Infrastructure.Rabbit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace DBWatcher.API
 {
@@ -33,25 +24,26 @@ namespace DBWatcher.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddAutoMapper();
-            services.AddRabbitMessageBus(Configuration["ConnectionStrings.Rabbit"]);
-            services.AddUnitOfWork(Configuration["ConnectionStrings.Mongo"]);
+            services.AddRabbitMessageBus(Configuration.GetConnectionString("Rabbit"));
+            services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"));
             services.AddEventHandlers();
-            IScriptExecutor se;
+            services.AddSingleton<ICryptoManager, CryptoManager>();
+            services.AddSingleton<IConnectionPropertiesService, ConnectionPropertiesService>();
+            services.AddSingleton<IScriptService, ScriptService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment()) {
+            if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-            }
-            else {
+            else
                 app.UseHsts();
-            }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

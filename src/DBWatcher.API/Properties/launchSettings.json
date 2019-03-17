@@ -1,8 +1,8 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": false, 
     "iisExpress": {
       "applicationUrl": "http://localhost:37577",
       "sslPort": 44356
@@ -11,7 +11,6 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -19,7 +18,6 @@
     },
     "DBWatcher.API": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/values",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {

@@ -1,34 +1,37 @@
-using System;
-
 namespace DBWatcher.Core.Entities
 {
     /// <summary>
-    /// Properties for connecting to server
+    ///     Properties for connecting to server
     /// </summary>
-    public class ConnectionProperties : BaseEntity<Guid>
+    public class ConnectionProperties : BaseEntity<int>
     {
         /// <summary>
-        /// Connection name
+        ///     Connection name
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
-        /// RDBMS id
+        ///     RDBMS id
         /// </summary>
         public RDBMS System { get; set; }
+
         /// <summary>
-        /// Server address
+        ///     Server address
         /// </summary>
         public string Server { get; set; }
+
         /// <summary>
-        /// Login
+        ///     Login
         /// </summary>
         public string Login { get; set; }
+
         /// <summary>
-        /// Password
+        ///     Password
         /// </summary>
         public string Password { get; set; }
+
         /// <summary>
-        /// Is password encrypted
+        ///     Is password encrypted
         /// </summary>
         public bool IsPasswordEncrypted { get; set; }
     }

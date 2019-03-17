@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.Core.Entities;
@@ -8,16 +7,17 @@ using DBWatcher.Core.Queue;
 
 namespace DBWatcher.Infrastructure.Events.Handlers
 {
-    public class ScriptEventHandler : IEventHandler<Script, Guid>
+    public class ScriptEventHandler : IEventHandler<Script, int>
     {
-        private readonly IMessageBus _messageBus;
         private readonly IMapper _mapper;
+        private readonly IMessageBus _messageBus;
 
         public ScriptEventHandler(IMessageBus messageBus, IMapper mapper)
         {
             _messageBus = messageBus;
             _mapper = mapper;
         }
+
         public void HandleInsert(Script entity)
         {
             PublishChangeAsync(entity);
@@ -28,9 +28,9 @@ namespace DBWatcher.Infrastructure.Events.Handlers
             PublishChangeAsync(entity);
         }
 
-        public void HandleDelete(Guid id)
+        public void HandleDelete(int id)
         {
-            _messageBus.PublishAsync(new ScriptDeleted() {
+            _messageBus.PublishAsync(new ScriptDeleted {
                 Id = id
             });
         }

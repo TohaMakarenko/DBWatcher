@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.ScriptExecutor;
@@ -23,6 +22,6 @@ namespace DBWatcher.Core.Services
         /// <param name="connectionPropertiesId"></param>
         /// <param name="databaseName"></param>
         /// <returns></returns>
-        Task<IScriptExecutor> GetScriptExecutor(Guid connectionPropertiesId, string databaseName = null);
+        Task<IScriptExecutor> GetScriptExecutor(int connectionPropertiesId, string databaseName = null);
     }
 }

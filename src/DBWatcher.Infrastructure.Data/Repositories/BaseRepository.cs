@@ -7,23 +7,13 @@ namespace DBWatcher.Infrastructure.Data.Repositories
 {
     public abstract class BaseRepository<T, TKey> : IRepository<T, TKey> where T : BaseEntity<TKey>
     {
-        protected readonly IMongoDatabase Database;
         protected readonly string CollectionName;
+        protected readonly IMongoDatabase Database;
 
         protected BaseRepository(IMongoDatabase database, string collectionName)
         {
             Database = database;
             CollectionName = collectionName;
-        }
-
-        protected IMongoCollection<T> GetCollection()
-        {
-            return Database.GetCollection<T>(CollectionName);
-        }
-
-        private FilterDefinition<T> GetIdFilter(TKey id)
-        {
-            return Builders<T>.Filter.Eq(x => x.Id, id);
         }
 
         public virtual Task<T> Get(TKey id)
@@ -46,6 +36,28 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         public virtual Task Delete(TKey id)
         {
             return GetCollection().DeleteOneAsync(GetIdFilter(id));
+        }
+
+        protected IMongoCollection<T> GetCollection()
+        {
+            return Database.GetCollection<T>();
+        }
+
+        private FilterDefinition<T> GetIdFilter(TKey id)
+        {
+            return Builders<T>.Filter.Eq(x => x.Id, id);
+        }
+
+        public async Task<int> GetNextId<T>()
+        {
+            var update = Builders<Sequence>.Update.Inc(x => x.Value, 1);
+            var options = new FindOneAndUpdateOptions<Sequence> {
+                IsUpsert = true,
+                ReturnDocument = ReturnDocument.After
+            };
+            var value = await Database.GetCollection<Sequence>()
+                .FindOneAndUpdateAsync<Sequence>(x => x.Name == typeof(T).Name, update, options);
+            return value.Value;
         }
     }
 }

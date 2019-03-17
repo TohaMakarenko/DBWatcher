@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using DBWatcher.Core;
 using DBWatcher.Core.Entities;
@@ -13,7 +12,7 @@ namespace DBWatcher.Infrastructure.Events
     {
         public static IServiceCollection AddEventHandlers(this IServiceCollection services)
         {
-            services.AddSingleton<IEventHandler<Script, Guid>>(provider => {
+            services.AddSingleton<IEventHandler<Script, int>>(provider => {
                 var bus = provider.GetService<IMessageBus>();
                 var mapper = provider.GetService<IMapper>();
                 var unitOfWork = provider.GetService<IUnitOfWork>();
@@ -23,8 +22,8 @@ namespace DBWatcher.Infrastructure.Events
                 unitOfWork.ScriptRepository.OnDelete += handler.HandleDelete;
                 return handler;
             });
-            
-            services.AddSingleton<IEventHandler<ConnectionProperties, Guid>>(provider => {
+
+            services.AddSingleton<IEventHandler<ConnectionProperties, int>>(provider => {
                 var bus = provider.GetService<IMessageBus>();
                 var mapper = provider.GetService<IMapper>();
                 var unitOfWork = provider.GetService<IUnitOfWork>();
