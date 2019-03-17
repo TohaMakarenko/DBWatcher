@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.API.DTO.Scripts;
 using DBWatcher.Core;
 using DBWatcher.Core.Results;
+using DBWatcher.Core.ScriptExecutor;
 using DBWatcher.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +39,8 @@ namespace DBWatcher.API.Controllers
         {
             var connection = await _work.ConnectionPropertiesRepository.Get(executeScript.ConnectionPropsId);
             var executor = _scriptService.GetScriptExecutor(connection, executeScript.Database);
-            return await executor.ExecuteScriptMultiple(executeScript.Body, executeScript.Params);
+            var param = _mapper.Map<IEnumerable<Parameter>>(executeScript.Params);
+            return await executor.ExecuteScriptMultiple(executeScript.Body, param);
         }
     }
 }

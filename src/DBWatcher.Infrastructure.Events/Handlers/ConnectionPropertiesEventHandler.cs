@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using AutoMapper;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.Events;
 using DBWatcher.Core.Messages;
@@ -9,13 +8,11 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 {
     public class ConnectionPropertiesEventHandler : IEventHandler<ConnectionProperties, int>
     {
-        private readonly IMapper _mapper;
         private readonly IMessageBus _messageBus;
 
-        public ConnectionPropertiesEventHandler(IMessageBus messageBus, IMapper mapper)
+        public ConnectionPropertiesEventHandler(IMessageBus messageBus)
         {
             _messageBus = messageBus;
-            _mapper = mapper;
         }
 
         public void HandleInsert(ConnectionProperties entity)
@@ -37,7 +34,13 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 
         private Task PublishChangeAsync(ConnectionProperties props)
         {
-            var message = _mapper.Map<ConnectionPropertiesChanged>(props);
+            var message = new ConnectionPropertiesChanged {
+                Id = props.Id,
+                Login = props.Login,
+                Server = props.Server,
+                Password = props.Password,
+                IsPasswordEncrypted = props.IsPasswordEncrypted
+            };
             return _messageBus.PublishAsync(message);
         }
     }

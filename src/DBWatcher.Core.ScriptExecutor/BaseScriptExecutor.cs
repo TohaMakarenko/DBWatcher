@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using Dapper;
 using DBWatcher.Core.Entities;
 
 namespace DBWatcher.Core.ScriptExecutor
@@ -8,7 +10,7 @@ namespace DBWatcher.Core.ScriptExecutor
         protected readonly IConnectionBuilder ConnectionBuilder;
         public ConnectionProperties ConnectionProperties { get; }
         public string DatabaseName { get; }
-        
+
         protected BaseScriptExecutor(ConnectionProperties connectionProperties, string databaseName)
         {
             ConnectionBuilder = ConnectionManager.ConnectionBuilder;
@@ -26,6 +28,16 @@ namespace DBWatcher.Core.ScriptExecutor
         protected SqlConnection BuildConnection()
         {
             return ConnectionBuilder.BuildConnection(ConnectionProperties, DatabaseName);
+        }
+
+        protected DynamicParameters ToDynamicParameters(IEnumerable<Parameter> param)
+        {
+            var result = new DynamicParameters();
+            foreach (var p in param) {
+                result.Add(p.Name, p.Value, p.Type);
+            }
+
+            return result;
         }
     }
 }

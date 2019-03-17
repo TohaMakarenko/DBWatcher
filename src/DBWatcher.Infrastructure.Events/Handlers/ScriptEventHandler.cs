@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using AutoMapper;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.Events;
 using DBWatcher.Core.Messages;
@@ -9,13 +8,11 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 {
     public class ScriptEventHandler : IEventHandler<Script, int>
     {
-        private readonly IMapper _mapper;
         private readonly IMessageBus _messageBus;
 
-        public ScriptEventHandler(IMessageBus messageBus, IMapper mapper)
+        public ScriptEventHandler(IMessageBus messageBus)
         {
             _messageBus = messageBus;
-            _mapper = mapper;
         }
 
         public void HandleInsert(Script entity)
@@ -37,7 +34,10 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 
         private Task PublishChangeAsync(Script script)
         {
-            var message = _mapper.Map<ScriptChanged>(script);
+            var message = new ScriptChanged {
+                Id = script.Id,
+                Body = script.Body
+            };
             return _messageBus.PublishAsync(message);
         }
     }

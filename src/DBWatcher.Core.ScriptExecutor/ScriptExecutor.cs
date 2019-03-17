@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
 using DBWatcher.Core.Entities;
-using DBWatcher.Core.Repositories;
 using DBWatcher.Core.Results;
 using DBWatcher.Core.ScriptExecutor;
 
@@ -23,6 +21,12 @@ namespace DBWatcher.Core.Services
             return ExecuteScript<dynamic>(script, param);
         }
 
+        public Task<ScriptResult<dynamic>> ExecuteScript(string script, IEnumerable<Parameter> param)
+        {
+            var dynamicParams = ToDynamicParameters(param);
+            return ExecuteScript(script, dynamicParams);
+        }
+
         public async Task<ScriptResult<T>> ExecuteScript<T>(string script, object param = null)
         {
             var result = new ScriptResult<T>();
@@ -38,6 +42,12 @@ namespace DBWatcher.Core.Services
             return result;
         }
 
+        public Task<ScriptResult<T>> ExecuteScript<T>(string script, IEnumerable<Parameter> param)
+        {
+            var dynamicParams = ToDynamicParameters(param);
+            return ExecuteScript<T>(script, dynamicParams);
+        }
+
         public async Task<ScriptMultipleResult> ExecuteScriptMultiple(string script, object param = null)
         {
             var result = new ScriptMultipleResult();
@@ -45,9 +55,7 @@ namespace DBWatcher.Core.Services
             try {
                 using (var connection = BuildConnection()) {
                     var reader = await connection.QueryMultipleAsync(script, param);
-                    while (!reader.IsConsumed) {
-                        data.Add(reader.Read());
-                    }
+                    while (!reader.IsConsumed) data.Add(reader.Read());
 
                     result.Data = data;
                 }
@@ -57,6 +65,12 @@ namespace DBWatcher.Core.Services
             }
 
             return result;
+        }
+
+        public Task<ScriptMultipleResult> ExecuteScriptMultiple(string script, IEnumerable<Parameter> param)
+        {
+            var dynamicParams = ToDynamicParameters(param);
+            return ExecuteScriptMultiple(script, dynamicParams);
         }
     }
 }

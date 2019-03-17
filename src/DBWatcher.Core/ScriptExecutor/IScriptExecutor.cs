@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DBWatcher.Core.Entities;
 using DBWatcher.Core.Results;
@@ -20,6 +21,8 @@ namespace DBWatcher.Core.ScriptExecutor
         /// <returns>dynamic script result</returns>
         Task<ScriptResult<dynamic>> ExecuteScript(string script, object param = null);
 
+        Task<ScriptResult<dynamic>> ExecuteScript(string script, IEnumerable<Parameter> param);
+
         /// <summary>
         /// Execute script using parameters object
         /// </summary>
@@ -29,6 +32,8 @@ namespace DBWatcher.Core.ScriptExecutor
         /// <returns>strong typed script result</returns>
         Task<ScriptResult<T>> ExecuteScript<T>(string script, object param = null);
 
+        Task<ScriptResult<T>> ExecuteScript<T>(string script, IEnumerable<Parameter> param);
+
         /// <summary>
         /// Execute script using parameters object
         /// </summary>
@@ -36,5 +41,7 @@ namespace DBWatcher.Core.ScriptExecutor
         /// <param name="param">used parameters</param>
         /// <returns>multiple results set</returns>
         Task<ScriptMultipleResult> ExecuteScriptMultiple(string script, object param = null);
+
+        Task<ScriptMultipleResult> ExecuteScriptMultiple(string script, IEnumerable<Parameter> param);
     }
 }

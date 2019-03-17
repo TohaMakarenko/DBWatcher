@@ -27,8 +27,8 @@ namespace DBWatcher.API
 
             services.AddAutoMapper();
             services.AddRabbitMessageBus(Configuration.GetConnectionString("Rabbit"));
-            services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"));
-            services.AddEventHandlers();
+            services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"),
+                UnitOfWorkEventConfigurator.AddEventHandlers);
             services.AddSingleton<ICryptoManager, CryptoManager>();
             services.AddSingleton<IConnectionPropertiesService, ConnectionPropertiesService>();
             services.AddSingleton<IScriptService, ScriptService>();
