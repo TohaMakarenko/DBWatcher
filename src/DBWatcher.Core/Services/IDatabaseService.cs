@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 
 namespace DBWatcher.Core.Services
 {
     public interface IDatabaseService
     {
-        Task<IEnumerable<string>> GetDatabases(ConnectionProperties connectionProperties);        
+        Task<IEnumerable<string>> GetDatabases(ConnectionProperties connectionProperties);
     }
 }

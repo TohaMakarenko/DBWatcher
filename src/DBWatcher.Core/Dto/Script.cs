@@ -1,27 +1,27 @@
-﻿namespace DBWatcher.Core.Entities
+﻿namespace DBWatcher.Core.Dto
 {
     /// <summary>
-    /// SQL script details
+    ///     SQL script details
     /// </summary>
-    public class Script : BaseEntity<int>
+    public class Script : BaseDto<int>
     {
         /// <summary>
-        /// Script name
+        ///     Script name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Description
+        ///     Description
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Script author
+        ///     Script author
         /// </summary>
         public string Author { get; set; }
 
         /// <summary>
-        /// Script text
+        ///     Script text
         /// </summary>
         public string Body { get; set; }
     }

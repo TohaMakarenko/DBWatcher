@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 
 namespace DBWatcher.Core.Repositories
 {

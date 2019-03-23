@@ -1,5 +1,5 @@
 using AutoMapper;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Messages;
 
 namespace DBWatcher.Infrastructure.Events

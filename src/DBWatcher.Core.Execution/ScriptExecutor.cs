@@ -2,19 +2,15 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Results;
-using DBWatcher.Core.ScriptExecutor;
 
-namespace DBWatcher.Core.Services
+namespace DBWatcher.Core.Execution
 {
     public class ScriptExecutor : BaseScriptExecutor, IScriptExecutor
     {
-        public ScriptExecutor(ConnectionProperties connectionProperties, string databaseName) : base(
-            connectionProperties, databaseName) { }
-
-        public ScriptExecutor(ConnectionProperties connectionProperties, string databaseName,
-            IConnectionBuilder connectionBuilder) : base(connectionProperties, databaseName, connectionBuilder) { }
+        public ScriptExecutor(ConnectionProperties connectionProperties, IConnectionBuilder connectionBuilder) : base(
+            connectionProperties, connectionBuilder) { }
 
         public Task<ScriptResult<dynamic>> ExecuteScript(string script, object param = null)
         {

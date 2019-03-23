@@ -1,7 +1,10 @@
 using System.Data;
 
-namespace DBWatcher.Core.ScriptExecutor
+namespace DBWatcher.Core.Execution
 {
+    /// <summary>
+    ///     Script parameter
+    /// </summary>
     public class Parameter
     {
         public string Name { get; set; }

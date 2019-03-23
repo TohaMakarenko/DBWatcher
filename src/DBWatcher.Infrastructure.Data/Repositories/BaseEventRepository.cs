@@ -1,13 +1,13 @@
 using System;
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Repositories;
 using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
     public class BaseEventRepository<T, TKey> : BaseRepository<T, TKey>, IEventRepository<T, TKey>
-        where T : BaseEntity<TKey>
+        where T : BaseDto<TKey>
     {
         public BaseEventRepository(IMongoDatabase database, string collectionName) :
             base(database, collectionName) { }
@@ -28,12 +28,12 @@ namespace DBWatcher.Infrastructure.Data.Repositories
 
         public override async Task Delete(TKey id)
         {
-           await base.Delete(id);
-           OnDelete(id);
+            await base.Delete(id);
+            OnDelete(id);
         }
 
-        public event Action<T> OnInsert = (x) => { };
-        public event Action<T> OnUpdate = (x) => { };
-        public event Action<TKey> OnDelete = (x) => { };
+        public event Action<T> OnInsert = x => { };
+        public event Action<T> OnUpdate = x => { };
+        public event Action<TKey> OnDelete = x => { };
     }
 }

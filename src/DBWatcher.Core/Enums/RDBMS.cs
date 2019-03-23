@@ -1,4 +1,4 @@
-namespace DBWatcher.Core.Entities
+namespace DBWatcher.Core.Enums
 {
     public enum RDBMS
     {

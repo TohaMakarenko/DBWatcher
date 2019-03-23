@@ -10,21 +10,22 @@ namespace DBWatcher.Infrastructure.Data
     {
         public readonly IMongoDatabase Database;
 
-        public IMessageBus Bus { get; }
-        
-        public IScriptRepository ScriptRepository { get; }
-        public IConnectionPropertiesRepository ConnectionPropertiesRepository { get; }
+        public UnitOfWork(string connectionString, IMessageBroker broker) :
+            this(new MongoUrl(connectionString), broker) { }
 
-        public UnitOfWork(string connectionString, IMessageBus bus) : this(new MongoUrl(connectionString), bus) { }
-
-        public UnitOfWork(MongoUrl connectionUrl, IMessageBus bus)
+        public UnitOfWork(MongoUrl connectionUrl, IMessageBroker broker)
         {
-            Bus = bus;
+            Broker = broker;
             var client = new MongoClient(connectionUrl);
             Database = client.GetDatabase(connectionUrl.DatabaseName);
 
             ScriptRepository = new ScriptRepository(Database);
             ConnectionPropertiesRepository = new ConnectionPropertiesRepository(Database);
         }
+
+        public IMessageBroker Broker { get; }
+
+        public IScriptRepository ScriptRepository { get; }
+        public IConnectionPropertiesRepository ConnectionPropertiesRepository { get; }
     }
 }

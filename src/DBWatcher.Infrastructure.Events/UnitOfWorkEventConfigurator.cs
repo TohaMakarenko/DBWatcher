@@ -8,11 +8,11 @@ namespace DBWatcher.Infrastructure.Events
     {
         public static IUnitOfWork AddEventHandlers(IUnitOfWork work, IServiceProvider provider)
         {
-            var scriptEventHandler = new ScriptEventHandler(work.Bus);
+            var scriptEventHandler = new ScriptEventHandler(work.Broker);
             work.ScriptRepository.OnInsert += scriptEventHandler.HandleInsert;
             work.ScriptRepository.OnUpdate += scriptEventHandler.HandleUpdate;
             work.ScriptRepository.OnDelete += scriptEventHandler.HandleDelete;
-            var propertiesEventHandler = new ConnectionPropertiesEventHandler(work.Bus);
+            var propertiesEventHandler = new ConnectionPropertiesEventHandler(work.Broker);
             work.ConnectionPropertiesRepository.OnInsert += propertiesEventHandler.HandleInsert;
             work.ConnectionPropertiesRepository.OnUpdate += propertiesEventHandler.HandleUpdate;
             work.ConnectionPropertiesRepository.OnDelete += propertiesEventHandler.HandleDelete;

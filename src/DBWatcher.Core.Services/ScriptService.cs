@@ -1,27 +1,31 @@
 ﻿using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
-using DBWatcher.Core.ScriptExecutor;
+using DBWatcher.Core.Dto;
+using DBWatcher.Core.Execution;
 
 namespace DBWatcher.Core.Services
 {
     public class ScriptService : IScriptService
     {
         private readonly IConnectionPropertiesService _connectionPropertiesService;
+        private readonly IScriptExecutorManager _scriptManager;
 
-        public ScriptService(IConnectionPropertiesService connectionPropertiesService)
+        public ScriptService(IConnectionPropertiesService connectionPropertiesService,
+            IScriptExecutorManager scriptManager)
         {
             _connectionPropertiesService = connectionPropertiesService;
+            _scriptManager = scriptManager;
         }
 
-        public IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties, string databaseName = null)
+        public IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties)
         {
-            return new ScriptExecutor(connectionProperties, databaseName);
+            return _scriptManager.GetExecutor(connectionProperties);
         }
 
         public async Task<IScriptExecutor> GetScriptExecutor(int connectionPropertiesId, string databaseName = null)
         {
-            return GetScriptExecutor(await _connectionPropertiesService.GetByIdDecrypted(connectionPropertiesId),
-                databaseName);
+            var conProps = await _connectionPropertiesService.GetByIdDecrypted(connectionPropertiesId);
+            conProps.Database = databaseName;
+            return GetScriptExecutor(conProps);
         }
     }
 }

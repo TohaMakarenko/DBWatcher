@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Events;
 using DBWatcher.Core.Messages;
 using DBWatcher.Core.Queue;
@@ -8,11 +8,11 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 {
     public class ConnectionPropertiesEventHandler : IEventHandler<ConnectionProperties, int>
     {
-        private readonly IMessageBus _messageBus;
+        private readonly IMessageBroker _messageBroker;
 
-        public ConnectionPropertiesEventHandler(IMessageBus messageBus)
+        public ConnectionPropertiesEventHandler(IMessageBroker messageBroker)
         {
-            _messageBus = messageBus;
+            _messageBroker = messageBroker;
         }
 
         public void HandleInsert(ConnectionProperties entity)
@@ -27,7 +27,7 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 
         public void HandleDelete(int id)
         {
-            _messageBus.PublishAsync(new ConnectionPropertiesDeleted {
+            _messageBroker.PublishAsync(new ConnectionPropertiesDeleted {
                 Id = id
             });
         }
@@ -41,7 +41,7 @@ namespace DBWatcher.Infrastructure.Events.Handlers
                 Password = props.Password,
                 IsPasswordEncrypted = props.IsPasswordEncrypted
             };
-            return _messageBus.PublishAsync(message);
+            return _messageBroker.PublishAsync(message);
         }
     }
 }

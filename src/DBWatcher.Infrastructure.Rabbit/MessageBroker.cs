@@ -5,9 +5,9 @@ using EasyNetQ;
 
 namespace DBWatcher.Infrastructure.Rabbit
 {
-    public class MessageBus : IMessageBus
+    public class MessageBroker : IMessageBroker
     {
-        public MessageBus(string connectionString)
+        public MessageBroker(string connectionString)
         {
             Bus = RabbitHutch.CreateBus(connectionString);
             Bus.Advanced.Conventions.ExchangeNamingConvention =

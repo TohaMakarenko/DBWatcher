@@ -1,9 +1,11 @@
-namespace DBWatcher.Core.Entities
+using DBWatcher.Core.Enums;
+
+namespace DBWatcher.Core.Dto
 {
     /// <summary>
     ///     Properties for connecting to server
     /// </summary>
-    public class ConnectionProperties : BaseEntity<int>
+    public class ConnectionProperties : BaseDto<int>
     {
         /// <summary>
         ///     Connection name
@@ -29,6 +31,11 @@ namespace DBWatcher.Core.Entities
         ///     Password
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        ///     Database
+        /// </summary>
+        public string Database { get; set; }
 
         /// <summary>
         ///     Is password encrypted

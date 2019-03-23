@@ -1,20 +1,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
 using DBWatcher.Core.Results;
 
-namespace DBWatcher.Core.ScriptExecutor
+namespace DBWatcher.Core.Execution
 {
     /// <summary>
-    /// SQL scripts executor
+    ///     SQL scripts executor
     /// </summary>
     public interface IScriptExecutor
     {
-        ConnectionProperties ConnectionProperties { get; }
-        string DatabaseName { get; }
-
         /// <summary>
-        /// Execute script using parameters object
+        ///     Execute script using parameters object
         /// </summary>
         /// <param name="script">script to execute</param>
         /// <param name="param">used parameters</param>
@@ -24,7 +20,7 @@ namespace DBWatcher.Core.ScriptExecutor
         Task<ScriptResult<dynamic>> ExecuteScript(string script, IEnumerable<Parameter> param);
 
         /// <summary>
-        /// Execute script using parameters object
+        ///     Execute script using parameters object
         /// </summary>
         /// <param name="script">script to execute</param>
         /// <param name="param">used parameters</param>
@@ -35,7 +31,7 @@ namespace DBWatcher.Core.ScriptExecutor
         Task<ScriptResult<T>> ExecuteScript<T>(string script, IEnumerable<Parameter> param);
 
         /// <summary>
-        /// Execute script using parameters object
+        ///     Execute script using parameters object
         /// </summary>
         /// <param name="script">script to execute</param>
         /// <param name="param">used parameters</param>

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
-using DBWatcher.Core.ScriptExecutor;
+using DBWatcher.Core.Dto;
+using DBWatcher.Core.Execution;
 
 namespace DBWatcher.Core.Services
 {
@@ -13,9 +13,8 @@ namespace DBWatcher.Core.Services
         ///     Return script executor for connection properties
         /// </summary>
         /// <param name="connectionProperties"></param>
-        /// <param name="databaseName"></param>
         /// <returns></returns>
-        IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties, string databaseName = null);
+        IScriptExecutor GetScriptExecutor(ConnectionProperties connectionProperties);
 
         /// <summary>
         /// </summary>

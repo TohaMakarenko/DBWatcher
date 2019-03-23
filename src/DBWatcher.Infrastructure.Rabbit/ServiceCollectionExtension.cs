@@ -7,7 +7,7 @@ namespace DBWatcher.Infrastructure.Rabbit
     {
         public static IServiceCollection AddRabbitMessageBus(this IServiceCollection services, string connectionString)
         {
-            return services.AddSingleton<IMessageBus>(provider => new MessageBus(connectionString));
+            return services.AddSingleton<IMessageBroker>(provider => new MessageBroker(connectionString));
         }
     }
 }

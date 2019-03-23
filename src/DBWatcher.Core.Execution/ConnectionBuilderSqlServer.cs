@@ -1,13 +1,13 @@
 using System.Data.SqlClient;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 
-namespace DBWatcher.Core.ScriptExecutor
+namespace DBWatcher.Core.Execution
 {
-    public class ConnectionBuilder : IConnectionBuilder
+    public class ConnectionBuilderSqlServer : IConnectionBuilder
     {
-        public SqlConnection BuildConnection(ConnectionProperties connectionProperties, string databaseName = null)
+        public SqlConnection BuildConnection(ConnectionProperties connectionProperties)
         {
-            return new SqlConnection(CreateConnectionString(connectionProperties.Server, databaseName,
+            return new SqlConnection(CreateConnectionString(connectionProperties.Server, connectionProperties.Database,
                 connectionProperties.Login, connectionProperties.Password));
         }
 

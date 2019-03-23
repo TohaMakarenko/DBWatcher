@@ -5,8 +5,8 @@ namespace DBWatcher.Core
 {
     public interface IUnitOfWork
     {
-        IMessageBus Bus { get; }
-        
+        IMessageBroker Broker { get; }
+
         IScriptRepository ScriptRepository { get; }
         IConnectionPropertiesRepository ConnectionPropertiesRepository { get; }
     }

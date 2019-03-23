@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.API", "src\DBWatc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.API.DTO", "src\DBWatcher.API.DTO\DBWatcher.API.DTO.csproj", "{DAE02F12-E8D0-404A-A863-7DA640A5CE7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core.ScriptExecutor", "src\DBWatcher.Core.ScriptExecutor\DBWatcher.Core.ScriptExecutor.csproj", "{F7F825AE-383F-4BF5-996B-D052DBA41073}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core.Execution", "src\DBWatcher.Core.Execution\DBWatcher.Core.Execution.csproj", "{F7F825AE-383F-4BF5-996B-D052DBA41073}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Infrastructure.Events", "src\DBWatcher.Infrastructure.Events\DBWatcher.Infrastructure.Events.csproj", "{1DF14BE3-6F21-4F77-98F5-FD541AF0496C}"
 EndProject

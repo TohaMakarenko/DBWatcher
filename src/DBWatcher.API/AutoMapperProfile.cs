@@ -1,7 +1,7 @@
 using AutoMapper;
 using DBWatcher.API.DTO.Scripts;
-using DBWatcher.Core.Entities;
-using DBWatcher.Core.ScriptExecutor;
+using DBWatcher.Core.Dto;
+using DBWatcher.Core.Execution;
 
 namespace DBWatcher.API
 {

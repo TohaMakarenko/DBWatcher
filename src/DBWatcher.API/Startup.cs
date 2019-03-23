@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DBWatcher.Core.Execution;
 using DBWatcher.Core.Services;
 using DBWatcher.Infrastructure.Data;
 using DBWatcher.Infrastructure.Events;
@@ -30,6 +31,7 @@ namespace DBWatcher.API
             services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"),
                 UnitOfWorkEventConfigurator.AddEventHandlers);
             services.AddSingleton<ICryptoManager, CryptoManager>();
+            services.AddExecution();
             services.AddSingleton<IConnectionPropertiesService, ConnectionPropertiesService>();
             services.AddSingleton<IScriptService, ScriptService>();
         }

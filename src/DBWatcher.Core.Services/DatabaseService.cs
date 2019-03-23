@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
-using DBWatcher.Core.Entities;
-using DBWatcher.Core.ScriptExecutor;
+using DBWatcher.Core.Dto;
 
 namespace DBWatcher.Core.Services
 {
@@ -15,7 +12,7 @@ namespace DBWatcher.Core.Services
         {
             _scriptService = scriptService;
         }
-        
+
         public async Task<IEnumerable<string>> GetDatabases(ConnectionProperties connectionProperties)
         {
             var result = await _scriptService.GetScriptExecutor(connectionProperties)

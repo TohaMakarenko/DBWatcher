@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 
 namespace DBWatcher.Core.Repositories
 {
-    public interface IRepository<T, TKey> where T : BaseEntity<TKey>
+    public interface IRepository<T, TKey> where T : BaseDto<TKey>
     {
         Task<T> Get(TKey id);
         Task<T> Update(T entity);

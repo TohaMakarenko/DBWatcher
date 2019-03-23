@@ -2,36 +2,31 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using Dapper;
-using DBWatcher.Core.Entities;
-using DBWatcher.Core.Repositories;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Results;
 using DBWatcher.Core.Services;
-using DBWatcher.Infrastructure.Data;
-using DBWatcher.Infrastructure.Data.Repositories;
 
 namespace ManualConsoleTest
 {
-    
-    class Program
+    internal class Program
     {
-        const string ConnectionString = "mongodb://localhost:27017/DbWatcherTest";
-        
-        static void Main(string[] args)
+        private const string ConnectionString = "mongodb://localhost:27017/DbWatcherTest";
+
+        private static void Main(string[] args)
         {
             TestRepos();
             Console.ReadLine();
         }
 
-        static async void TestRepos()
+        private static async void TestRepos()
         {
             var sqlConn = new SqlConnection();
             var trans = sqlConn.BeginTransaction(IsolationLevel.Chaos);
         }
 
-        static async Task TestServices()
+        private static async Task TestServices()
         {
-            var props = new ConnectionProperties() {
+            var props = new ConnectionProperties {
                 Server = @"localhost\SQLEXPRESS",
                 Login = "sa",
                 Password = "sa",
@@ -39,29 +34,25 @@ namespace ManualConsoleTest
             };
 
             var conPropsService = new ConnectionPropertiesService(null, new CryptoManager());
-            var scriptService = new ScriptService(conPropsService);
+            var scriptService = new ScriptService(conPropsService, null);
             var executor = scriptService.GetScriptExecutor(props);
-            var script = new Script() {
+            var script = new Script {
                 Body = "select * from sys.databases"
             };
             var result = await executor.ExecuteScriptMultiple(script.Body);
             PrintScriptMultipleResult(result);
         }
 
-        static void PrintScriptMultipleResult(ScriptMultipleResult result)
+        private static void PrintScriptMultipleResult(ScriptMultipleResult result)
         {
             if (!result.IsSuccess) {
                 Console.WriteLine("ERRORS: ");
-                foreach (var error in result.Errors) {
-                    Console.WriteLine(error);
-                }
+                foreach (var error in result.Errors) Console.WriteLine(error);
             }
             else {
                 foreach (var dataSet in result.Data) {
                     Console.WriteLine();
-                    foreach (var row in dataSet) {
-                        Console.WriteLine(row);
-                    }
+                    foreach (var row in dataSet) Console.WriteLine(row);
                 }
             }
         }

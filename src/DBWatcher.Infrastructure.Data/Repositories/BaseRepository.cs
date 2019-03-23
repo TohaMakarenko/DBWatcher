@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Repositories;
 using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
-    public abstract class BaseRepository<T, TKey> : IRepository<T, TKey> where T : BaseEntity<TKey>
+    public abstract class BaseRepository<T, TKey> : IRepository<T, TKey> where T : BaseDto<TKey>
     {
         protected readonly string CollectionName;
         protected readonly IMongoDatabase Database;

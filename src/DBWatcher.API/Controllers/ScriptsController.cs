@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.API.DTO.Scripts;
 using DBWatcher.Core;
+using DBWatcher.Core.Execution;
 using DBWatcher.Core.Results;
-using DBWatcher.Core.ScriptExecutor;
 using DBWatcher.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,8 +37,8 @@ namespace DBWatcher.API.Controllers
         [HttpPost("Execute")]
         public async Task<ActionResult<ScriptMultipleResult>> ExecuteScript([FromBody] ExecuteScriptDto executeScript)
         {
-            var connection = await _work.ConnectionPropertiesRepository.Get(executeScript.ConnectionPropsId);
-            var executor = _scriptService.GetScriptExecutor(connection, executeScript.Database);
+            var executor =
+                await _scriptService.GetScriptExecutor(executeScript.ConnectionPropsId, executeScript.Database);
             var param = _mapper.Map<IEnumerable<Parameter>>(executeScript.Params);
             return await executor.ExecuteScriptMultiple(executeScript.Body, param);
         }

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.API.DTO.Scripts;
 using DBWatcher.Core;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DBWatcher.API.Controllers

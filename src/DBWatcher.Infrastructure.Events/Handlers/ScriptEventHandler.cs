@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DBWatcher.Core.Entities;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Events;
 using DBWatcher.Core.Messages;
 using DBWatcher.Core.Queue;
@@ -8,11 +8,11 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 {
     public class ScriptEventHandler : IEventHandler<Script, int>
     {
-        private readonly IMessageBus _messageBus;
+        private readonly IMessageBroker _messageBroker;
 
-        public ScriptEventHandler(IMessageBus messageBus)
+        public ScriptEventHandler(IMessageBroker messageBroker)
         {
-            _messageBus = messageBus;
+            _messageBroker = messageBroker;
         }
 
         public void HandleInsert(Script entity)
@@ -27,7 +27,7 @@ namespace DBWatcher.Infrastructure.Events.Handlers
 
         public void HandleDelete(int id)
         {
-            _messageBus.PublishAsync(new ScriptDeleted {
+            _messageBroker.PublishAsync(new ScriptDeleted {
                 Id = id
             });
         }
@@ -38,7 +38,7 @@ namespace DBWatcher.Infrastructure.Events.Handlers
                 Id = script.Id,
                 Body = script.Body
             };
-            return _messageBus.PublishAsync(message);
+            return _messageBroker.PublishAsync(message);
         }
     }
 }
