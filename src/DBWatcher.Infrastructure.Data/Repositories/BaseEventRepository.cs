@@ -9,6 +9,9 @@ namespace DBWatcher.Infrastructure.Data.Repositories
     public class BaseEventRepository<T, TKey> : BaseRepository<T, TKey>, IEventRepository<T, TKey>
         where T : BaseDto<TKey>
     {
+        public BaseEventRepository(IMongoDatabase database) :
+            base(database) { }
+
         public BaseEventRepository(IMongoDatabase database, string collectionName) :
             base(database, collectionName) { }
 

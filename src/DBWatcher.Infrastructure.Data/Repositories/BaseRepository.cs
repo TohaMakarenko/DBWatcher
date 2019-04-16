@@ -5,12 +5,17 @@ using MongoDB.Driver;
 
 namespace DBWatcher.Infrastructure.Data.Repositories
 {
-    public abstract class BaseRepository<T, TKey> : IRepository<T, TKey> where T : BaseDto<TKey>
+    public class BaseRepository<T, TKey> : IRepository<T, TKey> where T : BaseDto<TKey>
     {
         protected readonly string CollectionName;
         protected readonly IMongoDatabase Database;
 
-        protected BaseRepository(IMongoDatabase database, string collectionName)
+        public BaseRepository(IMongoDatabase database)
+        {
+            Database = database;
+        }
+
+        public BaseRepository(IMongoDatabase database, string collectionName)
         {
             Database = database;
             CollectionName = collectionName;
@@ -40,7 +45,9 @@ namespace DBWatcher.Infrastructure.Data.Repositories
 
         protected IMongoCollection<T> GetCollection()
         {
-            return Database.GetCollection<T>();
+            return string.IsNullOrEmpty(CollectionName)
+                ? Database.GetCollection<T>()
+                : Database.GetCollection<T>(CollectionName);
         }
 
         private FilterDefinition<T> GetIdFilter(TKey id)

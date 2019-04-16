@@ -2,8 +2,8 @@
 using DBWatcher.Core.Execution;
 using DBWatcher.Core.Services;
 using DBWatcher.Infrastructure.Data;
-using DBWatcher.Infrastructure.Events;
 using DBWatcher.Infrastructure.Rabbit;
+using DBWatcher.Scheduling.Quartz;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,12 +28,19 @@ namespace DBWatcher.API
 
             services.AddAutoMapper();
             services.AddRabbitMessageBus(Configuration.GetConnectionString("Rabbit"));
-            services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"),
-                UnitOfWorkEventConfigurator.AddEventHandlers);
+            /*services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"),
+                UnitOfWorkEventConfigurator.AddEventHandlers);*/
+            services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"));
             services.AddSingleton<ICryptoManager, CryptoManager>();
             services.AddExecution();
             services.AddSingleton<IConnectionPropertiesService, ConnectionPropertiesService>();
             services.AddSingleton<IScriptService, ScriptService>();
+            services.AddQuartz(new QuartzProperties {
+                InstanceName = "DBWatcher",
+                SerializerType = "json",
+                StoreConnectionString = Configuration.GetConnectionString("QuartzStorage")
+            });
+            services.AddQuartzScriptScheduler();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

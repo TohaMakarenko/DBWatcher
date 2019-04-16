@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DBWatcher.Core.Execution
 {
-    public static class IServiceCollectionExtension
+    public static class ServiceCollectionExtensionExecution
     {
         public static void AddExecution(this IServiceCollection services)
         {

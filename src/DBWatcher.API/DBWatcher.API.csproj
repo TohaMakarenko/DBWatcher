@@ -29,6 +29,7 @@
       <ProjectReference Include="..\DBWatcher.Infrastructure.Data\DBWatcher.Infrastructure.Data.csproj" />
       <ProjectReference Include="..\DBWatcher.Infrastructure.Events\DBWatcher.Infrastructure.Events.csproj" />
       <ProjectReference Include="..\DBWatcher.Infrastructure.Rabbit\DBWatcher.Infrastructure.Rabbit.csproj" />
+        <ProjectReference Include="..\DBWatcher.Scheduling.Quartz\DBWatcher.Scheduling.Quartz.csproj"/>
     </ItemGroup>
 
 </Project>

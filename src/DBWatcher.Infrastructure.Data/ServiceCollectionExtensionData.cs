@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DBWatcher.Infrastructure.Data
 {
-    public static class ServiceCollectionExtension
+    public static class ServiceCollectionExtensionData
     {
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services, string connectionString,
             params Func<IUnitOfWork, IServiceProvider, IUnitOfWork>[] configs)

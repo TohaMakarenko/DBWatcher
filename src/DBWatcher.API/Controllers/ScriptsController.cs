@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.API.DTO.Scripts;
 using DBWatcher.Core;
+using DBWatcher.Core.Dto;
 using DBWatcher.Core.Execution;
 using DBWatcher.Core.Results;
 using DBWatcher.Core.Services;
@@ -41,6 +42,13 @@ namespace DBWatcher.API.Controllers
                 await _scriptService.GetScriptExecutor(executeScript.ConnectionPropsId, executeScript.Database);
             var param = _mapper.Map<IEnumerable<Parameter>>(executeScript.Params);
             return await executor.ExecuteScriptMultiple(executeScript.Body, param);
+        }
+
+        [HttpPost("Insert")]
+        public async Task<ActionResult<Script>> InsertScript([FromBody] Script script)
+        {
+            script = await _work.ScriptRepository.Insert(script);
+            return Ok(script);
         }
     }
 }
