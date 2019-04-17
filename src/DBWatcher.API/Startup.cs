@@ -37,7 +37,7 @@ namespace DBWatcher.API
             services.AddSingleton<IScriptService, ScriptService>();
             services.AddQuartz(new QuartzProperties {
                 InstanceName = "DBWatcher",
-                SerializerType = "json",
+                SerializerType = "binary",
                 StoreConnectionString = Configuration.GetConnectionString("QuartzStorage")
             });
             services.AddQuartzScriptScheduler();

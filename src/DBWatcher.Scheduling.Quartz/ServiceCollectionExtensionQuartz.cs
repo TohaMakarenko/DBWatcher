@@ -22,21 +22,20 @@ namespace DBWatcher.Scheduling.Quartz
         public static IServiceCollection AddQuartzScriptScheduler(this IServiceCollection services)
         {
             services.AddSingleton<IScriptScheduler, QuartzScriptScheduler>();
-
+            services.AddTransient<ScriptJob>();
             return services;
         }
 
         private static IScheduler BuildScheduler(IServiceProvider container, QuartzProperties properties)
         {
-            var propsCollection = new NameValueCollection();
-            propsCollection[StdSchedulerFactory.PropertySchedulerInstanceName] = properties.InstanceName;
-            propsCollection[StdSchedulerFactory.PropertySchedulerInstanceId] =
-                $"{Environment.MachineName}-{Guid.NewGuid()}";
-            propsCollection[StdSchedulerFactory.PropertyJobStoreType] = typeof(MongoDbJobStore).AssemblyQualifiedName;
-            propsCollection[
-                    $"{StdSchedulerFactory.PropertyJobStorePrefix}.{StdSchedulerFactory.PropertyDataSourceConnectionString}"]
-                = properties.StoreConnectionString;
-            propsCollection["quartz.serializer.type"] = properties.SerializerType;
+            var propsCollection = new NameValueCollection {
+                [StdSchedulerFactory.PropertySchedulerInstanceName] = properties.InstanceName,
+                [StdSchedulerFactory.PropertySchedulerInstanceId] = $"{Environment.MachineName}-{Guid.NewGuid()}",
+                [StdSchedulerFactory.PropertyJobStoreType] = typeof(MongoDbJobStore).AssemblyQualifiedName,
+                [$"{StdSchedulerFactory.PropertyJobStorePrefix}.{StdSchedulerFactory.PropertyDataSourceConnectionString}"] =
+                    properties.StoreConnectionString,
+                ["quartz.serializer.type"] = properties.SerializerType
+            };
 
             var jobFactory = (IJobFactory) container.GetService(typeof(IJobFactory));
             var factory = new SchedulerFactory(propsCollection, jobFactory);
