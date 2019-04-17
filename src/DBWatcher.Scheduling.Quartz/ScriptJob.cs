@@ -8,23 +8,23 @@ namespace DBWatcher.Scheduling.Quartz
 {
     public class ScriptJob : IJob, IDisposable
     {
+        [NonSerialized] private readonly IUnitOfWork _unitOfWork;
+        [NonSerialized] private ConnectionProperties _connection;
+        [NonSerialized] private Script _script;
+
         public ScriptJob(IUnitOfWork unitOfWork)
         {
-            UnitOfWork = unitOfWork;
-            UnitOfWork.ScriptRepository.OnUpdate += OnScriptUpdated;
-            UnitOfWork.ConnectionPropertiesRepository.OnUpdate += OnConnectionUpdated;
+            _unitOfWork = unitOfWork;
+            _unitOfWork.ScriptRepository.OnUpdate += OnScriptUpdated;
+            _unitOfWork.ConnectionPropertiesRepository.OnUpdate += OnConnectionUpdated;
         }
-
-        public IUnitOfWork UnitOfWork { get; }
-        private Script Script { get; set; }
-        private ConnectionProperties Connection { get; set; }
 
         public Job Job { get; set; }
 
         public void Dispose()
         {
-            UnitOfWork.ScriptRepository.OnUpdate -= OnScriptUpdated;
-            UnitOfWork.ConnectionPropertiesRepository.OnUpdate -= OnConnectionUpdated;
+            _unitOfWork.ScriptRepository.OnUpdate -= OnScriptUpdated;
+            _unitOfWork.ConnectionPropertiesRepository.OnUpdate -= OnConnectionUpdated;
         }
 
         public async Task Execute(IJobExecutionContext context)
@@ -36,22 +36,22 @@ namespace DBWatcher.Scheduling.Quartz
 
         private async Task<Script> GetScript()
         {
-            return Script ?? (Script = await UnitOfWork.ScriptRepository.Get(Job.ScriptId));
+            return _script ?? (_script = await _unitOfWork.ScriptRepository.Get(Job.ScriptId));
         }
 
         private async Task<ConnectionProperties> GetConnection()
         {
-            return Connection ?? (Connection = await UnitOfWork.ConnectionPropertiesRepository.Get(Job.ConnectionId));
+            return _connection ?? (_connection = await _unitOfWork.ConnectionPropertiesRepository.Get(Job.ConnectionId));
         }
 
         private void OnScriptUpdated(Script script)
         {
-            if (script.Id == Script.Id) Script = script;
+            if (script.Id == _script.Id) _script = script;
         }
 
         private void OnConnectionUpdated(ConnectionProperties connection)
         {
-            if (connection.Id == Connection.Id) Connection = connection;
+            if (connection.Id == _connection.Id) _connection = connection;
         }
     }
 }
