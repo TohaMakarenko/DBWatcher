@@ -41,5 +41,11 @@ namespace DBWatcher.Core.Dto
         ///     Is password encrypted
         /// </summary>
         public bool IsPasswordEncrypted { get; set; }
+
+        public ConnectionProperties WithDatabaseName(string dbName)
+        {
+            Database = dbName;
+            return this;
+        }
     }
 }

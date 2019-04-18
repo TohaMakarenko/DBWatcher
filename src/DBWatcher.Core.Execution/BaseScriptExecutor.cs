@@ -15,7 +15,17 @@ namespace DBWatcher.Core.Execution
             ConnectionBuilder = connectionBuilder;
         }
 
+        public BaseScriptExecutor(ConnectionProperties connectionProperties, ExecutionContext context, IConnectionBuilder connectionBuilder)
+        {
+            ConnectionProperties = connectionProperties;
+            Context = context;
+            ConnectionBuilder = connectionBuilder;
+            if (!string.IsNullOrEmpty(context.Database))
+                ConnectionProperties.WithDatabaseName(context.Database); // todo it will change conProp object, be careful
+        }
+
         public ConnectionProperties ConnectionProperties { get; }
+        public ExecutionContext Context { get; }
 
         protected SqlConnection BuildConnection()
         {

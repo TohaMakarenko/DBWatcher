@@ -16,5 +16,11 @@ namespace DBWatcher.Core.Execution
             var builder = _connectionManager.GetBuilder(connectionProperties.System);
             return new ScriptExecutor(connectionProperties, builder);
         }
+
+        public IScriptExecutor GetExecutor(ConnectionProperties connectionProperties, ExecutionContext context)
+        {
+            var builder = _connectionManager.GetBuilder(connectionProperties.System);
+            return new ScriptExecutor(connectionProperties, context, builder);
+        }
     }
 }

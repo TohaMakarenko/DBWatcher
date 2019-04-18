@@ -13,5 +13,13 @@ namespace DBWatcher.Core.Execution
         /// <param name="connectionProperties"></param>
         /// <returns></returns>
         IScriptExecutor GetExecutor(ConnectionProperties connectionProperties);
+
+        /// <summary>
+        ///     Build script executor for connection properties
+        /// </summary>
+        /// <param name="connectionProperties"></param>
+        /// <param name="context">additional execution properties</param>
+        /// <returns></returns>
+        IScriptExecutor GetExecutor(ConnectionProperties connectionProperties, ExecutionContext context);
     }
 }
