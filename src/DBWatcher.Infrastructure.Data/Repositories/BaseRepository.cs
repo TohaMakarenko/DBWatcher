@@ -55,7 +55,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
             return Builders<T>.Filter.Eq(x => x.Id, id);
         }
 
-        public async Task<int> GetNextId<T>()
+        public async Task<int> GetNextId()
         {
             var update = Builders<Sequence>.Update.Inc(x => x.Value, 1);
             var options = new FindOneAndUpdateOptions<Sequence> {

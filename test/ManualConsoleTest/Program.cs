@@ -18,7 +18,7 @@ namespace ManualConsoleTest
             Console.ReadLine();
         }
 
-        private static async void TestRepos()
+        private static void TestRepos()
         {
             var sqlConn = new SqlConnection();
             var trans = sqlConn.BeginTransaction(IsolationLevel.Chaos);

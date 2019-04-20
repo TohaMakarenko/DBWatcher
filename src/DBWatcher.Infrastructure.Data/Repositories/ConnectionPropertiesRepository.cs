@@ -25,7 +25,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
 
         public override async Task<ConnectionProperties> Insert(ConnectionProperties entity)
         {
-            entity.Id = await GetNextId<Script>();
+            entity.Id = await GetNextId();
             return await base.Insert(entity);
         }
     }

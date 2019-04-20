@@ -12,7 +12,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
 
         public override async Task<Job> Insert(Job entity)
         {
-            entity.Id = await GetNextId<Job>();
+            entity.Id = await GetNextId();
             return await base.Insert(entity);
         }
     }
