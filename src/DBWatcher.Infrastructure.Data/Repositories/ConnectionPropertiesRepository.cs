@@ -12,7 +12,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         public ConnectionPropertiesRepository(IMongoDatabase database, string collectionName)
             : base(database, collectionName) { }
 
-        public ConnectionPropertiesRepository(IMongoDatabase database) : base(database, "ConnectionProperties") { }
+        public ConnectionPropertiesRepository(IMongoDatabase database) : base(database) { }
 
 
         public Task<List<ConnectionProperties>> GetShortInfoList()

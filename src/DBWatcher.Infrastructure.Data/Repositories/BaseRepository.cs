@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DBWatcher.Core.Dto;
 using DBWatcher.Core.Repositories;
@@ -19,6 +20,11 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         {
             Database = database;
             CollectionName = collectionName;
+        }
+
+        public virtual async Task<IEnumerable<T>> Get()
+        {
+            return await GetCollection().Find(x => true).ToListAsync();
         }
 
         public virtual Task<T> Get(TKey id)

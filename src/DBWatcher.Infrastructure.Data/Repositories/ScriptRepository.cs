@@ -9,7 +9,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
     public class ScriptRepository : BaseEventRepository<Script, int>, IScriptRepository
     {
         public ScriptRepository(IMongoDatabase database, string collectionName) : base(database, collectionName) { }
-        public ScriptRepository(IMongoDatabase database) : base(database, "Scripts") { }
+        public ScriptRepository(IMongoDatabase database) : base(database) { }
 
         public Task<List<Script>> GetShortInfoPage(int offset, int count)
         {
@@ -18,6 +18,19 @@ namespace DBWatcher.Infrastructure.Data.Repositories
                 .Limit(count)
                 .Project(Builders<Script>.Projection.Expression(i => new Script
                     {Id = i.Id, Name = i.Name, Description = i.Description, Author = i.Author}))
+                .ToListAsync();
+        }
+
+        public override async Task<IEnumerable<Script>> Get()
+        {
+            return await GetCollection()
+                .Find(x => true)
+                .Project(x => new Script {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Author = x.Author
+                })
                 .ToListAsync();
         }
 

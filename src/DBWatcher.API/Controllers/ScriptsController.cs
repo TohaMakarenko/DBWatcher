@@ -44,11 +44,11 @@ namespace DBWatcher.API.Controllers
             return await executor.ExecuteScriptMultiple(executeScript.Body, param);
         }
 
-        [HttpPost("Insert")]
+        [HttpPost]
         public async Task<ActionResult<Script>> InsertScript([FromBody] Script script)
         {
             script = await _work.ScriptRepository.Insert(script);
-            return Ok(script);
+            return script;
         }
     }
 }

@@ -13,6 +13,8 @@ namespace DBWatcher.Core
 
         IJobRepository JobRepository { get; }
 
+        IFolderRepository FolderRepository { get; }
+
         IRepository<T, TKey> GetRepository<T, TKey>() where T : BaseDto<TKey>;
         IRepository<T, TKey> GetRepository<T, TKey>(string collectionName) where T : BaseDto<TKey>;
     }
