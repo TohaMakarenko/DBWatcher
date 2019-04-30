@@ -36,7 +36,7 @@ namespace DBWatcher.API.Controllers
             });
             foreach (var folder in folders) {
                 var dto = _mapper.Map<FolderDto>(folder);
-                dto.Scripts = scripts.Where(x => folder.Scripts.Contains(x.Id))
+                dto.Scripts = scripts.Where(x => folder.Scripts?.Contains(x.Id) ?? false)
                     .ToArray();
                 result.Add(dto);
             }
