@@ -24,11 +24,10 @@ namespace DBWatcher.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options => {
-                foreach (var corsUrl in Configuration.GetSection("Cors").GetChildren())
-                    options.AddPolicy(corsUrl.Key,
-                        builder => builder.WithOrigins(corsUrl.Value));
-            });
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()));
             services.AddMvc().AddNewtonsoftJson();
 
             services.AddAutoMapper();
@@ -51,7 +50,7 @@ namespace DBWatcher.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors("Frontend");
+            app.UseCors("CorsPolicy");
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else

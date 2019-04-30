@@ -45,9 +45,16 @@ namespace DBWatcher.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Script>> InsertScript([FromBody] Script script)
+        public async Task<ActionResult<Script>> Insert([FromBody] Script script)
         {
             script = await _work.ScriptRepository.Insert(script);
+            return script;
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Script>> Update([FromBody] Script script)
+        {
+            script = await _work.ScriptRepository.Update(script);
             return script;
         }
     }
