@@ -35,5 +35,17 @@ namespace DBWatcher.API.Controllers
             folder = await _work.FolderRepository.Insert(folder);
             return folder;
         }
+
+        [HttpPost("{id}/removeScript")]
+        public async Task<ActionResult<Folder>> RemoveScript(int id, [FromBody] int scriptId)
+        {
+            return await _work.FolderRepository.RemoveScript(id, scriptId);
+        }
+
+        [HttpPost("{id}/addScript")]
+        public async Task<ActionResult<Folder>> AddScript(int id, [FromBody] int scriptId)
+        {
+            return await _work.FolderRepository.AddScript(id, scriptId);
+        }
     }
 }

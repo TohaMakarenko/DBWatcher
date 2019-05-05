@@ -15,5 +15,19 @@ namespace DBWatcher.Infrastructure.Data.Repositories
             entity.Id = await GetNextId();
             return await base.Insert(entity);
         }
+
+        public Task<Folder> AddScript(int id, int scriptId)
+        {
+            return GetCollection().FindOneAndUpdateAsync(x => x.Id == id,
+                Builders<Folder>.Update
+                    .AddToSet(x => x.Scripts, scriptId));
+        }
+
+        public Task<Folder> RemoveScript(int id, int scriptId)
+        {
+            return GetCollection().FindOneAndUpdateAsync(x => x.Id == id,
+                Builders<Folder>.Update
+                    .PullFilter(x => x.Scripts, s => s == scriptId));
+        }
     }
 }
