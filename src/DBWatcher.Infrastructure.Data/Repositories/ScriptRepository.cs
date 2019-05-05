@@ -11,11 +11,9 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         public ScriptRepository(IMongoDatabase database, string collectionName) : base(database, collectionName) { }
         public ScriptRepository(IMongoDatabase database) : base(database) { }
 
-        public Task<List<Script>> GetShortInfoPage(int offset, int count)
+        public Task<List<Script>> GetShortInfo()
         {
             return GetCollection().Find(FilterDefinition<Script>.Empty)
-                .Skip(offset)
-                .Limit(count)
                 .Project(Builders<Script>.Projection.Expression(i => new Script
                     {Id = i.Id, Name = i.Name, Description = i.Description, Author = i.Author}))
                 .ToListAsync();

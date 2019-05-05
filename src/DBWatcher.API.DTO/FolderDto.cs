@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DBWatcher.API.DTO.Scripts;
 
 namespace DBWatcher.API.DTO
 {
@@ -7,6 +6,6 @@ namespace DBWatcher.API.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<ScriptInfoDto> Scripts { get; set; }
+        public IEnumerable<int> Scripts { get; set; }
     }
 }

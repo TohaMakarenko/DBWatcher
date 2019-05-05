@@ -14,8 +14,7 @@ namespace DBWatcher.API
             CreateMap<ConnectionProperties, ConnectionPropertiesDto>();
             CreateMap<ParameterDto, Parameter>();
             CreateMap<Script, ScriptInfoDto>();
-            CreateMap<Folder, FolderDto>()
-                .ForMember(dst => dst.Scripts, c => c.Ignore());
+            CreateMap<Folder, FolderDto>();
         }
     }
 }
