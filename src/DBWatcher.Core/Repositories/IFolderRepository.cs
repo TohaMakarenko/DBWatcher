@@ -7,5 +7,6 @@ namespace DBWatcher.Core.Repositories
     {
         Task<Folder> AddScript(int id, int scriptId);
         Task<Folder> RemoveScript(int id, int scriptId);
+        Task<Folder> MoveScript(int id, int scriptId);
     }
 }

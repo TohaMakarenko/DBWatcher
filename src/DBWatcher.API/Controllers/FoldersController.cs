@@ -47,5 +47,11 @@ namespace DBWatcher.API.Controllers
         {
             return await _work.FolderRepository.AddScript(id, scriptId);
         }
+
+        [HttpPost("{id}/moveScript")]
+        public async Task<ActionResult<Folder>> MoveScript(int id, [FromBody] int scriptId)
+        {
+            return await _work.FolderRepository.MoveScript(id, scriptId);
+        }
     }
 }

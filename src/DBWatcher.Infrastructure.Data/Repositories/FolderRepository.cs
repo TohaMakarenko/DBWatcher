@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using DBWatcher.Core.Dto;
 using DBWatcher.Core.Repositories;
@@ -26,8 +27,21 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         public Task<Folder> RemoveScript(int id, int scriptId)
         {
             return GetCollection().FindOneAndUpdateAsync(x => x.Id == id,
-                Builders<Folder>.Update
-                    .PullFilter(x => x.Scripts, s => s == scriptId));
+                Builders<Folder>.Update.Pull(x => x.Scripts, scriptId));
+        }
+
+        public async Task<Folder> MoveScript(int id, int scriptId)
+        {
+            // remove from prev folder if it exists and is not destination folder
+            await GetCollection()
+                .UpdateOneAsync(x => x.Id != id && x.Scripts.Contains(scriptId),
+                    Builders<Folder>.Update.Pull(x => x.Scripts, scriptId));
+
+            var newFolder = await GetCollection()
+                .FindOneAndUpdateAsync(x => x.Id == id && !x.Scripts.Contains(scriptId),
+                    Builders<Folder>.Update
+                        .AddToSet(x => x.Scripts, scriptId));
+            return newFolder;
         }
     }
 }
