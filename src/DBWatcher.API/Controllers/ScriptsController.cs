@@ -64,5 +64,12 @@ namespace DBWatcher.API.Controllers
             script = await _work.ScriptRepository.Update(script);
             return script;
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _work.ScriptRepository.Delete(id);
+            return Ok();
+        }
     }
 }
