@@ -26,6 +26,7 @@ namespace DBWatcher.API.Controllers
             _scriptService = scriptService;
         }
 
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<ScriptInfoDto>>> GetList()
         {
             var scripts = await _work.ScriptRepository.GetShortInfo();
