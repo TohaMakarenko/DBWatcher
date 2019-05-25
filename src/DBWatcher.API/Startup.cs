@@ -39,6 +39,7 @@ namespace DBWatcher.API
             services.AddExecution();
             services.AddSingleton<IConnectionPropertiesService, ConnectionPropertiesService>();
             services.AddSingleton<IScriptService, ScriptService>();
+            services.AddSingleton<IDatabaseService, DatabaseService>();
             services.AddQuartz(new QuartzProperties {
                 InstanceName = "DBWatcher",
                 SerializerType = "binary",

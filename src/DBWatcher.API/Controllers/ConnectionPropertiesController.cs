@@ -61,5 +61,7 @@ namespace DBWatcher.API.Controllers
             await _work.ConnectionPropertiesRepository.Delete(id);
             return Ok();
         }
+        
+        
     }
 }

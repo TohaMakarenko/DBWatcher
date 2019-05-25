@@ -3,10 +3,10 @@ using System.Data;
 
 namespace DBWatcher.Core.Execution
 {
-    [Serializable]
     /// <summary>
     ///     Script parameter
     /// </summary>
+    [Serializable]
     public class Parameter
     {
         public string Name { get; set; }

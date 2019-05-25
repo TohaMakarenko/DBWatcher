@@ -1,4 +1,7 @@
-﻿namespace DBWatcher.Core.Dto
+﻿using System.Collections.Generic;
+using DBWatcher.Core.Execution;
+
+namespace DBWatcher.Core.Dto
 {
     /// <summary>
     ///     SQL script details
@@ -24,5 +27,10 @@
         ///     Script text
         /// </summary>
         public string Body { get; set; }
+        
+        /// <summary>
+        ///     Script parameters declaration and default values
+        /// </summary>
+        public IEnumerable<Parameter> Parameters { get; set; }
     }
 }

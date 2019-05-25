@@ -43,15 +43,6 @@ namespace DBWatcher.API.Controllers
             return _mapper.Map<ScriptDto>(script);
         }
 
-        [HttpPost("Execute")]
-        public async Task<ActionResult<ScriptMultipleResult>> ExecuteScript([FromBody] ExecuteScriptDto executeScript)
-        {
-            var executor =
-                await _scriptService.GetScriptExecutor(executeScript.ConnectionPropsId, executeScript.Database);
-            var param = _mapper.Map<IEnumerable<Parameter>>(executeScript.Params);
-            return await executor.ExecuteScriptMultiple(executeScript.Body, param);
-        }
-
         [HttpPost]
         public async Task<ActionResult<Script>> Insert([FromBody] Script script)
         {
