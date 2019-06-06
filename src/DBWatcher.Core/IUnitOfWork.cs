@@ -12,6 +12,7 @@ namespace DBWatcher.Core
         IConnectionPropertiesRepository ConnectionPropertiesRepository { get; }
 
         IJobRepository JobRepository { get; }
+        IJobLogRepository JobLogRepository { get; }
 
         IFolderRepository FolderRepository { get; }
 

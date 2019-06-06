@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using DBWatcher.Core;
 using DBWatcher.Core.Dto;
+using DBWatcher.Core.Services;
 using Quartz;
 
 namespace DBWatcher.Scheduling.Quartz
@@ -9,12 +10,14 @@ namespace DBWatcher.Scheduling.Quartz
     public class ScriptJob : IJob, IDisposable
     {
         [NonSerialized] private readonly IUnitOfWork _unitOfWork;
+        private readonly IScriptService _scriptService;
         [NonSerialized] private ConnectionProperties _connection;
         [NonSerialized] private Script _script;
 
-        public ScriptJob(IUnitOfWork unitOfWork)
+        public ScriptJob(IUnitOfWork unitOfWork, IScriptService scriptService)
         {
             _unitOfWork = unitOfWork;
+            _scriptService = scriptService;
             _unitOfWork.ScriptRepository.OnUpdate += OnScriptUpdated;
             _unitOfWork.ConnectionPropertiesRepository.OnUpdate += OnConnectionUpdated;
         }
@@ -31,7 +34,17 @@ namespace DBWatcher.Scheduling.Quartz
         {
             var script = await GetScript();
             var connection = await GetConnection();
-            Console.WriteLine(script.Body);
+            var executor = _scriptService.GetScriptExecutor(connection);
+            var startTime = DateTime.Now;
+            var result = await executor.ExecuteScriptMultiple(script.Body, Job.Parameters);
+            var finishTime = DateTime.Now;
+            var logRecord = new JobLog {
+                JobId = Job.Id,
+                StartTime = startTime,
+                FinishTime = finishTime,
+                Result = result
+            };
+            await _unitOfWork.JobLogRepository.Insert(logRecord);
         }
 
         private async Task<Script> GetScript()

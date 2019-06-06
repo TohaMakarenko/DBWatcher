@@ -23,7 +23,6 @@ namespace DBWatcher.API.Controllers
         [HttpPost("insert")]
         public async Task<ActionResult<Job>> InsertJob([FromBody] Job job)
         {
-            job.Interval = new TimeSpan(0, 0, 5); //todo only for test
             job = await _work.JobRepository.Insert(job);
             return Ok(job);
         }

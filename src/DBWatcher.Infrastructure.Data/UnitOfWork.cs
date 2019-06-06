@@ -23,6 +23,7 @@ namespace DBWatcher.Infrastructure.Data
             ScriptRepository = new ScriptRepository(Database);
             ConnectionPropertiesRepository = new ConnectionPropertiesRepository(Database);
             JobRepository = new JobRepository(Database);
+            JobLogRepository = new JobLogRepository(Database);
             FolderRepository = new FolderRepository(Database);
         }
 
@@ -31,6 +32,7 @@ namespace DBWatcher.Infrastructure.Data
         public IScriptRepository ScriptRepository { get; }
         public IConnectionPropertiesRepository ConnectionPropertiesRepository { get; }
         public IJobRepository JobRepository { get; }
+        public IJobLogRepository JobLogRepository { get; }
         public IFolderRepository FolderRepository { get; }
 
         public IRepository<T, TKey> GetRepository<T, TKey>() where T : BaseDto<TKey>
