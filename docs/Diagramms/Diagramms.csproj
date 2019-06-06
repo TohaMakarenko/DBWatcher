@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DBWatcher.API.DTO\DBWatcher.API.DTO.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.API\DBWatcher.API.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Core.Execution\DBWatcher.Core.Execution.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Core.Messages\DBWatcher.Core.Messages.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Core.Services\DBWatcher.Core.Services.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Core\DBWatcher.Core.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Infrastructure.Data\DBWatcher.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Infrastructure.Events\DBWatcher.Infrastructure.Events.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Infrastructure.Rabbit\DBWatcher.Infrastructure.Rabbit.csproj" />
+    <ProjectReference Include="..\..\src\DBWatcher.Scheduling.Quartz\DBWatcher.Scheduling.Quartz.csproj" />
+  </ItemGroup>
+
+</Project>

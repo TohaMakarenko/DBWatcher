@@ -10,7 +10,7 @@ namespace DBWatcher.Core.Execution
     public class Parameter
     {
         public string Name { get; set; }
-        public object Value { get; set; }
         public DbType Type { get; set; }
+        public object Value { get; set; }
     }
 }

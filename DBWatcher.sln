@@ -1,32 +1,39 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2207A848-C96C-47BA-BDF2-13035DDE9D1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core", "src\DBWatcher.Core\DBWatcher.Core.csproj", "{814EE155-2009-4C4C-AA3C-B0C325CB13C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Core", "src\DBWatcher.Core\DBWatcher.Core.csproj", "{814EE155-2009-4C4C-AA3C-B0C325CB13C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core.Services", "src\DBWatcher.Core.Services\DBWatcher.Core.Services.csproj", "{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Core.Services", "src\DBWatcher.Core.Services\DBWatcher.Core.Services.csproj", "{F2E8FB8A-7B15-4B0F-9FAB-D2BFF58CCCEA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A4636442-A285-4EF0-AEDC-65B194269598}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualConsoleTest", "test\ManualConsoleTest\ManualConsoleTest.csproj", "{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManualConsoleTest", "test\ManualConsoleTest\ManualConsoleTest.csproj", "{02736DBA-70E0-4818-BCAB-6AA3A22DAD55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Infrastructure.Data", "src\DBWatcher.Infrastructure.Data\DBWatcher.Infrastructure.Data.csproj", "{D99A6153-9F57-41A1-8F37-8F39B706BF95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Infrastructure.Data", "src\DBWatcher.Infrastructure.Data\DBWatcher.Infrastructure.Data.csproj", "{D99A6153-9F57-41A1-8F37-8F39B706BF95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.API", "src\DBWatcher.API\DBWatcher.API.csproj", "{988EE162-EFED-405C-A3AD-BE44AA53D027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.API", "src\DBWatcher.API\DBWatcher.API.csproj", "{988EE162-EFED-405C-A3AD-BE44AA53D027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.API.DTO", "src\DBWatcher.API.DTO\DBWatcher.API.DTO.csproj", "{DAE02F12-E8D0-404A-A863-7DA640A5CE7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.API.DTO", "src\DBWatcher.API.DTO\DBWatcher.API.DTO.csproj", "{DAE02F12-E8D0-404A-A863-7DA640A5CE7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core.Execution", "src\DBWatcher.Core.Execution\DBWatcher.Core.Execution.csproj", "{F7F825AE-383F-4BF5-996B-D052DBA41073}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Core.Execution", "src\DBWatcher.Core.Execution\DBWatcher.Core.Execution.csproj", "{F7F825AE-383F-4BF5-996B-D052DBA41073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Infrastructure.Events", "src\DBWatcher.Infrastructure.Events\DBWatcher.Infrastructure.Events.csproj", "{1DF14BE3-6F21-4F77-98F5-FD541AF0496C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Infrastructure.Events", "src\DBWatcher.Infrastructure.Events\DBWatcher.Infrastructure.Events.csproj", "{1DF14BE3-6F21-4F77-98F5-FD541AF0496C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Infrastructure.Rabbit", "src\DBWatcher.Infrastructure.Rabbit\DBWatcher.Infrastructure.Rabbit.csproj", "{6F193D3A-5115-4FF9-8C20-04B34D9C1C28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Infrastructure.Rabbit", "src\DBWatcher.Infrastructure.Rabbit\DBWatcher.Infrastructure.Rabbit.csproj", "{6F193D3A-5115-4FF9-8C20-04B34D9C1C28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Core.Messages", "src\DBWatcher.Core.Messages\DBWatcher.Core.Messages.csproj", "{25912748-6E5F-4095-A62D-57ACB6548D82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Core.Messages", "src\DBWatcher.Core.Messages\DBWatcher.Core.Messages.csproj", "{25912748-6E5F-4095-A62D-57ACB6548D82}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Worker", "Worker", "{7C55932C-16E4-4E38-A043-4678FCE25F3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWatcher.Scheduling.Quartz", "src\DBWatcher.Scheduling.Quartz\DBWatcher.Scheduling.Quartz.csproj", "{2DC87793-3ECE-4090-B369-653F3209C2D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBWatcher.Scheduling.Quartz", "src\DBWatcher.Scheduling.Quartz\DBWatcher.Scheduling.Quartz.csproj", "{2DC87793-3ECE-4090-B369-653F3209C2D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C0A82E57-5A80-4E7D-8DB6-0EA807200DAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagramms", "docs\Diagramms\Diagramms.csproj", "{EFB18388-E150-433E-984A-AE5DCF0747A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +85,13 @@ Global
 		{2DC87793-3ECE-4090-B369-653F3209C2D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DC87793-3ECE-4090-B369-653F3209C2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DC87793-3ECE-4090-B369-653F3209C2D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFB18388-E150-433E-984A-AE5DCF0747A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFB18388-E150-433E-984A-AE5DCF0747A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFB18388-E150-433E-984A-AE5DCF0747A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFB18388-E150-433E-984A-AE5DCF0747A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{814EE155-2009-4C4C-AA3C-B0C325CB13C1} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
@@ -92,5 +106,9 @@ Global
 		{25912748-6E5F-4095-A62D-57ACB6548D82} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
 		{7C55932C-16E4-4E38-A043-4678FCE25F3D} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
 		{2DC87793-3ECE-4090-B369-653F3209C2D8} = {2207A848-C96C-47BA-BDF2-13035DDE9D1E}
+		{EFB18388-E150-433E-984A-AE5DCF0747A4} = {C0A82E57-5A80-4E7D-8DB6-0EA807200DAF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {939E0FE9-2071-4EBB-AF23-7CDF2F028623}
 	EndGlobalSection
 EndGlobal

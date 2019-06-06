@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="DBWatcher.Core.Dto.BaseDto&lt;TKey&gt;">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DBWatcher.Core.Dto.ConnectionProperties">
+    <Position X="14.25" Y="3.5" Width="3.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DBWatcher.Core.Dto.Folder">
+    <Position X="11.5" Y="3.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DBWatcher.Core.Dto.Job">
+    <Position X="8" Y="3.5" Width="2.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DBWatcher.Core.Dto.JobLog">
+    <Position X="18.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DBWatcher.Core.Dto.Script">
+    <Position X="5" Y="3.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
