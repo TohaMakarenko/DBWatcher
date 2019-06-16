@@ -5,14 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Quartz.Serialization.Json" Version="3.0.7"/>
-        <PackageReference Include="Quartz.Spi.MongoDbJobStore" Version="3.0.3"/>
-        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0"/>
+        <PackageReference Include="Quartz.Serialization.Json" Version="3.0.7" />
+        <PackageReference Include="Quartz.Spi.MongoDbJobStore" Version="3.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DBWatcher.Core\DBWatcher.Core.csproj"/>
+        <ProjectReference Include="..\DBWatcher.Core\DBWatcher.Core.csproj" />
     </ItemGroup>
 
 </Project>

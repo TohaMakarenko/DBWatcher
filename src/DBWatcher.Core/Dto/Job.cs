@@ -51,7 +51,7 @@ namespace DBWatcher.Core.Dto
         /// <summary>
         ///     Repeat interval
         /// </summary>
-        public TimeSpan Interval { get; set; }
+        public TimeSpan? Interval { get; set; }
 
         /// <summary>
         ///     IsRepeatable

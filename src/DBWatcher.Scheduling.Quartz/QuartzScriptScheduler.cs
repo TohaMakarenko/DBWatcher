@@ -42,12 +42,19 @@ namespace DBWatcher.Scheduling.Quartz
             var jobDetails = BuildJob(job);
             var trigger = BuildTrigger(job);
             await QuartzScheduler.ScheduleJob(jobDetails, trigger);
+            job.IsActive = true;
             await repo.Update(job);
         }
 
-        public Task StopJob(int jobId)
+        public async Task StopJob(int jobId)
         {
-            return QuartzScheduler.DeleteJob(GetJobKey(jobId));
+            var repo = UnitOfWork.JobRepository;
+            var job = await repo.Get(jobId);
+            if (job == null)
+                throw new EntityNotFoundException<Job, int>(jobId);
+            await QuartzScheduler.DeleteJob(GetJobKey(jobId));
+            job.IsActive = false;
+            await repo.Update(job);
         }
 
         /// <summary>
@@ -78,8 +85,8 @@ namespace DBWatcher.Scheduling.Quartz
                     triggerBuilder
                         .WithCronSchedule(job.Cron);
                     break;
-                case JobType.Simple when job.IsRepeatable:
-                    triggerBuilder.WithSimpleSchedule(x => x.WithInterval(job.Interval)
+                case JobType.Simple when job.IsRepeatable && job.Interval.HasValue:
+                    triggerBuilder.WithSimpleSchedule(x => x.WithInterval(job.Interval.Value)
                         .RepeatForever());
                     break;
                 case JobType.Simple:
@@ -89,8 +96,12 @@ namespace DBWatcher.Scheduling.Quartz
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (job.StartAt.HasValue)
-                triggerBuilder.StartAt(job.StartAt.Value);
+            if (job.StartAt.HasValue) {
+                if (job.StartAt.Value < DateTime.Now)
+                    triggerBuilder.StartNow();
+                else
+                    triggerBuilder.StartAt(job.StartAt.Value);
+            }
             else
                 triggerBuilder.StartNow();
 

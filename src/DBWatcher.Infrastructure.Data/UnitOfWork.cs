@@ -1,3 +1,4 @@
+using AutoMapper;
 using DBWatcher.Core;
 using DBWatcher.Core.Dto;
 using DBWatcher.Core.Queue;
@@ -11,10 +12,10 @@ namespace DBWatcher.Infrastructure.Data
     {
         public readonly IMongoDatabase Database;
 
-        public UnitOfWork(string connectionString, IMessageBroker broker) :
-            this(new MongoUrl(connectionString), broker) { }
+        public UnitOfWork(string connectionString, IMessageBroker broker, IMapper mapper) :
+            this(new MongoUrl(connectionString), broker, mapper) { }
 
-        public UnitOfWork(MongoUrl connectionUrl, IMessageBroker broker)
+        public UnitOfWork(MongoUrl connectionUrl, IMessageBroker broker, IMapper mapper)
         {
             Broker = broker;
             var client = new MongoClient(connectionUrl);
@@ -23,7 +24,7 @@ namespace DBWatcher.Infrastructure.Data
             ScriptRepository = new ScriptRepository(Database);
             ConnectionPropertiesRepository = new ConnectionPropertiesRepository(Database);
             JobRepository = new JobRepository(Database);
-            JobLogRepository = new JobLogRepository(Database);
+            JobLogRepository = new JobLogRepository(Database, mapper);
             FolderRepository = new FolderRepository(Database);
         }
 

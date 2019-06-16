@@ -1,4 +1,5 @@
 using System;
+using AutoMapper;
 using DBWatcher.Core;
 using DBWatcher.Core.Queue;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,8 @@ namespace DBWatcher.Infrastructure.Data
         {
             return services.AddSingleton(provider => {
                 var bus = provider.GetService<IMessageBroker>();
-                IUnitOfWork work = new UnitOfWork(connectionString, bus);
+                var mapper = provider.GetService<IMapper>();
+                IUnitOfWork work = new UnitOfWork(connectionString, bus, mapper);
                 if (configs.Length > 0)
                     foreach (var config in configs)
                         work = config(work, provider);

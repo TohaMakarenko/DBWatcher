@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using DBWatcher.Core.Scheduling;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Impl;
@@ -41,8 +42,14 @@ namespace DBWatcher.Scheduling.Quartz
             var factory = new SchedulerFactory(propsCollection, jobFactory);
             var scheduler = factory.GetScheduler().Result;
             scheduler.JobFactory = jobFactory;
-            scheduler.Start();
+            //scheduler.Start();
             return scheduler;
+        }
+
+        public static void StartScheduler(this IApplicationBuilder app, IServiceProvider container)
+        {
+            var scheduler = (IScheduler) container.GetService(typeof(IScheduler));
+            scheduler.Start();
         }
     }
 }

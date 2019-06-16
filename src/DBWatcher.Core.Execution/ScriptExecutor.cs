@@ -54,7 +54,8 @@ namespace DBWatcher.Core.Execution
             try {
                 using (var connection = BuildConnection()) {
                     var reader = await connection.QueryMultipleAsync(script, param);
-                    while (!reader.IsConsumed) data.Add(reader.Read());
+                    while (!reader.IsConsumed)
+                        data.Add(reader.Read());
 
                     result.Data = data;
                 }

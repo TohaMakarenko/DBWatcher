@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using AutoMapper;
 using DBWatcher.Core.Execution;
 using DBWatcher.Core.Services;
 using DBWatcher.Infrastructure.Data;
@@ -30,7 +32,17 @@ namespace DBWatcher.API
                     .AllowAnyHeader()));
             services.AddMvc().AddNewtonsoftJson();
 
-            services.AddAutoMapper();
+            var mappingConfig = new MapperConfiguration(mc => {
+                mc.AddMaps((from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                    from assemblyType in domainAssembly.GetTypes()
+                    where typeof(Profile).IsAssignableFrom(assemblyType)
+                    select assemblyType).ToArray());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddMvc();
             services.AddRabbitMessageBus(Configuration.GetConnectionString("Rabbit"));
             /*services.AddUnitOfWork(Configuration.GetConnectionString("Mongo"),
                 UnitOfWorkEventConfigurator.AddEventHandlers);*/
@@ -49,7 +61,7 @@ namespace DBWatcher.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider container)
         {
             app.UseCors("CorsPolicy");
             if (env.IsDevelopment())
@@ -59,6 +71,7 @@ namespace DBWatcher.API
 
             app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
+            app.StartScheduler(container);
         }
     }
 }

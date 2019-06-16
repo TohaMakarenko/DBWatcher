@@ -26,7 +26,7 @@ namespace DBWatcher.API.Controllers
         public async Task<ActionResult<IEnumerable<ConnectionProperties>>> GetList()
         {
             var connections = await _work.ConnectionPropertiesRepository.GetShortInfoList();
-            var result = _mapper.Map<IEnumerable<ScriptInfoDto>>(connections);
+            var result = _mapper.Map<IEnumerable<ConnectionProperties>>(connections);
             return Ok(result);
         }
 
@@ -61,7 +61,5 @@ namespace DBWatcher.API.Controllers
             await _work.ConnectionPropertiesRepository.Delete(id);
             return Ok();
         }
-        
-        
     }
 }
