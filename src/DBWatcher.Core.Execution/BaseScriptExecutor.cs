@@ -15,7 +15,7 @@ namespace DBWatcher.Core.Execution
             ConnectionBuilder = connectionBuilder;
         }
 
-        public BaseScriptExecutor(ConnectionProperties connectionProperties, ExecutionContext context, IConnectionBuilder connectionBuilder)
+        public BaseScriptExecutor(ConnectionProperties connectionProperties, JobExecutionContext context, IConnectionBuilder connectionBuilder)
         {
             ConnectionProperties = connectionProperties;
             Context = context;
@@ -25,7 +25,7 @@ namespace DBWatcher.Core.Execution
         }
 
         public ConnectionProperties ConnectionProperties { get; }
-        public ExecutionContext Context { get; }
+        public JobExecutionContext Context { get; }
 
         protected SqlConnection BuildConnection()
         {

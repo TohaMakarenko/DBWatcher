@@ -17,7 +17,7 @@ namespace DBWatcher.Core.Execution
             return new ScriptExecutor(connectionProperties, builder);
         }
 
-        public IScriptExecutor GetExecutor(ConnectionProperties connectionProperties, ExecutionContext context)
+        public IScriptExecutor GetExecutor(ConnectionProperties connectionProperties, JobExecutionContext context)
         {
             var builder = _connectionManager.GetBuilder(connectionProperties.System);
             return new ScriptExecutor(connectionProperties, context, builder);

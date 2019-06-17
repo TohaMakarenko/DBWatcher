@@ -16,6 +16,7 @@ namespace DBWatcher.API
             CreateMap<Script, ScriptInfoDto>();
             CreateMap<Script, ScriptDto>();
             CreateMap<Folder, FolderDto>();
+            CreateMap<Parameter, ParameterDto>().ReverseMap();
         }
     }
 }

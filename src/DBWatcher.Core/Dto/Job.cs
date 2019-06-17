@@ -19,14 +19,9 @@ namespace DBWatcher.Core.Dto
         public int ScriptId { get; set; }
 
         /// <summary>
-        ///     Connection with which the request will be executed
-        /// </summary>
-        public int ConnectionId { get; set; }
-
-        /// <summary>
         ///     Additional properties for script execution
         /// </summary>
-        public ExecutionContext ExecutionContext { get; set; }
+        public IEnumerable<JobExecutionContext> ExecutionContexts { get; set; }
 
         /// <summary>
         ///     Script parameters

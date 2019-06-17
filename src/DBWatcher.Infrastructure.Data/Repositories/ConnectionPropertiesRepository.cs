@@ -15,6 +15,15 @@ namespace DBWatcher.Infrastructure.Data.Repositories
         public ConnectionPropertiesRepository(IMongoDatabase database) : base(database) { }
 
 
+        public async Task<List<ConnectionProperties>> Get(params int[] ids)
+        {
+            if(ids.Length == 0)
+                return new List<ConnectionProperties>();
+            return await GetCollection()
+                .Find(Builders<ConnectionProperties>.Filter.In(x => x.Id, ids))
+                .ToListAsync();
+        }
+
         public Task<List<ConnectionProperties>> GetShortInfoList()
         {
             return GetCollection().Find(FilterDefinition<ConnectionProperties>.Empty)

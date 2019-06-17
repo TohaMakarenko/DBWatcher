@@ -12,7 +12,7 @@ namespace DBWatcher.Core.Execution
         public ScriptExecutor(ConnectionProperties connectionProperties, IConnectionBuilder connectionBuilder) : base(
             connectionProperties, connectionBuilder) { }
 
-        public ScriptExecutor(ConnectionProperties connectionProperties, ExecutionContext context, IConnectionBuilder connectionBuilder) : base(
+        public ScriptExecutor(ConnectionProperties connectionProperties, JobExecutionContext context, IConnectionBuilder connectionBuilder) : base(
             connectionProperties, context, connectionBuilder) { }
 
         public Task<ScriptResult<dynamic>> ExecuteScript(string script, object param = null)

@@ -6,6 +6,7 @@ namespace DBWatcher.Core.Repositories
 {
     public interface IConnectionPropertiesRepository : IEventRepository<ConnectionProperties, int>
     {
+        Task<List<ConnectionProperties>> Get(int[] ids);
         Task<List<ConnectionProperties>> GetShortInfoList();
     }
 }
