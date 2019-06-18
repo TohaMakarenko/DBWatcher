@@ -1,4 +1,5 @@
 using DBWatcher.Core.Dto;
+using DBWatcher.Core.Dto.Jobs;
 
 namespace DBWatcher.Core.Repositories
 {

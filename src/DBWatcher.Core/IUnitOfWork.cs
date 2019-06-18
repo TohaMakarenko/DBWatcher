@@ -13,6 +13,8 @@ namespace DBWatcher.Core
 
         IJobRepository JobRepository { get; }
         IJobLogRepository JobLogRepository { get; }
+        
+        IDashboardRepository DashboardRepository { get; }
 
         IFolderRepository FolderRepository { get; }
 

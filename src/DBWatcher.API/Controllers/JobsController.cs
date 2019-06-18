@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DBWatcher.Core;
 using DBWatcher.Core.Dto;
+using DBWatcher.Core.Dto.Jobs;
 using DBWatcher.Core.Scheduling;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,10 +44,10 @@ namespace DBWatcher.API.Controllers
         }
         
         [HttpPut]
-        public async Task<ActionResult<Job>> Update([FromBody] Job connection)
+        public async Task<ActionResult<Job>> Update([FromBody] Job job)
         {
-            connection = await _work.JobRepository.Update(connection);
-            return connection;
+            job = await _work.JobRepository.Update(job);
+            return job;
         }
         
         [HttpDelete("{id}")]
@@ -70,10 +71,17 @@ namespace DBWatcher.API.Controllers
             return Ok();
         }
         
-        [HttpGet("{id:int}/log")]
-        public async Task<ActionResult<IEnumerable<JobLog>>> GetLog(int id)
+        [HttpGet("{id:int}/log/{skip:int?}/{take:int?}")]
+        public async Task<ActionResult<IEnumerable<JobLog>>> GetLog(int id, int skip = 0, int take = 100)
         {
-            var result = await _work.JobLogRepository.GetForJob(id, 0, 100);
+            var result = await _work.JobLogRepository.GetForJob(id, skip, take);
+            return Ok(result);
+        }
+
+        [HttpPost("search")]
+        public async Task<ActionResult<IEnumerable<JobLog>>> GetLog([FromBody] JobLogSearchFilter filter)
+        {
+            var result = await _work.JobLogRepository.Search(filter);
             return Ok(result);
         }
     }

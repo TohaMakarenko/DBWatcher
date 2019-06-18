@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DBWatcher.Core.Enums;
 using DBWatcher.Core.Execution;
 
-namespace DBWatcher.Core.Dto
+namespace DBWatcher.Core.Dto.Jobs
 {
     /// <summary>
     ///     Job

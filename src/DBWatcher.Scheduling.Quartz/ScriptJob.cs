@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DBWatcher.Core;
 using DBWatcher.Core.Dto;
+using DBWatcher.Core.Dto.Jobs;
 using DBWatcher.Core.Execution;
 using DBWatcher.Core.Services;
 using Quartz;

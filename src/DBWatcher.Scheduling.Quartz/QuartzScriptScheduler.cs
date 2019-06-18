@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DBWatcher.Core;
 using DBWatcher.Core.Dto;
+using DBWatcher.Core.Dto.Jobs;
 using DBWatcher.Core.Enums;
 using DBWatcher.Core.Exceptions;
 using DBWatcher.Core.Scheduling;

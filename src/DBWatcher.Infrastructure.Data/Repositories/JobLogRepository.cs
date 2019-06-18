@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.Core.Dto;
+using DBWatcher.Core.Dto.Jobs;
 using DBWatcher.Core.Repositories;
 using DBWatcher.Infrastructure.Data.Entities;
 using MongoDB.Bson;
@@ -55,6 +56,22 @@ namespace DBWatcher.Infrastructure.Data.Repositories
                 .Limit(take)
                 .ToListAsync();
             return _mapper.Map<IEnumerable<JobLog>>(entities);
+        }
+
+        public async Task<IEnumerable<JobLog>> Search(JobLogSearchFilter filter)
+        {
+            if (!filter.Skip.HasValue)
+                filter.Skip = 0;
+            if (!filter.Take.HasValue)
+                filter.Skip = 100;
+            var result = await Database.GetCollection<JobLogMongo>(nameof(JobLog))
+                .Find(x => x.JobId == filter.JobId
+                           && x.Context.ConnectionId == filter.ConnectionId
+                           && x.Context.Database == filter.Database)
+                .Skip(filter.Skip)
+                .Limit(filter.Take)
+                .ToListAsync();
+            return _mapper.Map<IEnumerable<JobLog>>(result);
         }
     }
 }

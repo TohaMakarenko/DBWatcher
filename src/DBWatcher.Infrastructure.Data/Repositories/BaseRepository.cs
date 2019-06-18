@@ -49,7 +49,7 @@ namespace DBWatcher.Infrastructure.Data.Repositories
             return GetCollection().DeleteOneAsync(GetIdFilter(id));
         }
 
-        protected IMongoCollection<T> GetCollection()
+        protected virtual IMongoCollection<T> GetCollection()
         {
             return string.IsNullOrEmpty(CollectionName)
                 ? Database.GetCollection<T>()

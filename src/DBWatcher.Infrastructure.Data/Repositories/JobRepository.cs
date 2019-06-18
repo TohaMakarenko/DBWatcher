@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using DBWatcher.Core.Dto;
+using DBWatcher.Core.Dto.Jobs;
 using DBWatcher.Core.Repositories;
 using MongoDB.Driver;
 
