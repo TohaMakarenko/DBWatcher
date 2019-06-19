@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DBWatcher.Core.Dto;
@@ -68,10 +69,11 @@ namespace DBWatcher.Infrastructure.Data.Repositories
                 .Find(x => x.JobId == filter.JobId
                            && x.Context.ConnectionId == filter.ConnectionId
                            && x.Context.Database == filter.Database)
+                .Sort(Builders<JobLogMongo>.Sort.Descending(x => x.StartTime))
                 .Skip(filter.Skip)
                 .Limit(filter.Take)
                 .ToListAsync();
-            return _mapper.Map<IEnumerable<JobLog>>(result);
+            return _mapper.Map<IEnumerable<JobLog>>(result).OrderBy(x => x.StartTime);
         }
     }
 }
